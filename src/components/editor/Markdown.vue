@@ -1,7 +1,10 @@
 <template>
-  <markdown-it-vue-light class="md-body" :content="content" :options="options" />
+  <markdown-it-vue-light
+    class="md-body"
+    :content="content || ''"
+    :options="options"
+  />
 </template>
-
 
 <script>
 import MarkdownItVueLight from "markdown-it-vue/dist/markdown-it-vue-light.umd.min.js";
@@ -20,10 +23,10 @@ export default {
           html: true,
           linkify: true,
           typographer: true,
-          breaks: true,
-        //   highlight: function(/*str, lang*/) {
-        //     return "";
-        //   }
+          breaks: false
+          //   highlight: function(/*str, lang*/) {
+          //     return "";
+          //   }
         },
         linkAttributes: {
           attrs: {
@@ -33,6 +36,7 @@ export default {
         }
       }
     };
-  }
+  },
+  mounted() {}
 };
 </script>

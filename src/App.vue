@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @contextmenu.prevent>
+  <div id="app">
     <!-- Route  -->
     <router-view />
     <!-- ServiceWorker Updated Reload -->

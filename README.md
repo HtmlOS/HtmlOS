@@ -1,5 +1,7 @@
 # HtmlOS Home Page
 
+> 本站正在建设中, 敬请期待...
+
 ## Features
 
 - [ ] Blog

@@ -121,8 +121,8 @@ class Blog {
   fixUrl(content?: string, baseUrl?: string): string | undefined {
     if (content) {
       baseUrl = baseUrl || this.path;
-      const source = (baseUrl + "/").replace(/\/\//g, "/");
-      const pu = /\[([^\]]+)\]\(\s*\.\/([^)]*)\)/g;
+      const source = (baseUrl + "/").replace(/\/\//gim, "/");
+      const pu = /\[([^\]]*)\]\(\s*\.\/([^)]*)\)/gim;
       return content.replace(pu, "[$1](" + source + "$2)");
     }
   }
@@ -135,7 +135,7 @@ class BlogManager {
   static load() {
     for (const blog of AppEnv.blogs) {
       // 跳过 readme.md
-      if(blog.file.toUpperCase().endsWith("README.MD")){
+      if (blog.file.toUpperCase().endsWith("README.MD")) {
         continue;
       }
       this.blogs.push(new Blog(blog));

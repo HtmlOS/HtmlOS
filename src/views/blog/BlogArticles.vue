@@ -1,13 +1,20 @@
 <template>
   <div class="q-pa-md">
-    <q-list bordered separator>
-      <q-item v-for="(item, i) in blogs" :key="item.name" clickable v-ripple>
-        <q-item-section clickable v-ripple @click="openblog(item)">
-          <q-item-label>
-            {{ `${i + 1}` }}
-            <a :href="item.file">{{ `${item.file}` }}</a>
+    <q-list>
+      <q-item
+        v-for="item in blogs"
+        :key="item.name"
+        clickable
+        v-ripple
+        class="item-section"
+      >
+        <q-item-section v-ripple @click="openblog(item)">
+          <markdown :content="`# ${item.title}`" />
+
+          <q-item-label style="margin-bottom: 10px; background-color: white;">
+            {{ `📅 ${item.created.format("yyyy-MM-dd HH:mm")}` }}
           </q-item-label>
-          <q-item-label>{{ `${item.created.format("yyyy年MM月dd日 HH:mm")}` }}</q-item-label>
+
           <markdown :content="item.fixUrl(item.excerpt)" />
         </q-item-section>
       </q-item>
@@ -15,13 +22,20 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+.item-section {
+  margin: 8px;
+  padding: 8px;
+  background: whitesmoke;
+}
+</style>
+
 <script>
 import { BlogManager } from "@/plugins/blog";
 
 import Markdown from "@/components/editor/Markdown";
 
 export default {
-  name: "BlogPosts",
   components: { Markdown },
   data() {
     return {

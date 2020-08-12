@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>BlogTags</div>
 </template>
 
 <script>
