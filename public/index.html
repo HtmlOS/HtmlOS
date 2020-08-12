@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <!-- Loading Animation -->
+    <!-- https://www.html5tricks.com/tag/loading%E5%8A%A8%E7%94%BB/page/2 -->
+    <!-- https://www.html5tricks.com/5-cool-css3-loading-animation.html -->
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+    <div id="boot-loading">
+      <div class="spinner spinner-clock"><span></span></div>
+      <noscript>
+        <strong
+          >We're sorry but it doesn't work properly without JavaScript enabled.
+          Please enable it to continue.</strong
+        >
+      </noscript>
+
+      <!-- jinrishici -->
+      <div class="jinrishici" id="poem_sentence"></div>
+      <script
+        src="https://sdk.jinrishici.com/v2/browser/jinrishici.js"
+        charset="utf-8"
+      ></script>
+      <script type="text/javascript">
+        var lang = navigator.language.toLocaleLowerCase();
+        if (
+          lang.indexOf("zh") > 0 ||
+          lang.indexOf("cn") > 0 ||
+          lang.indexOf("hans") > 0
+        ) {
+          jinrishici.load(function(result) {
+            var sentence = document.querySelector("#poem_sentence");
+            if(sentence){
+              sentence.innerHTML = result.data.content;
+            }
+          });
+        }
+      </script>
+    </div>
+
+    <!-- vue -->
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

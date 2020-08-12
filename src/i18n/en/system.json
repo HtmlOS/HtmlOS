@@ -1,0 +1,10 @@
+{
+    "site":{
+        "name":"GankBLog"
+    },
+    "sw": {
+        "reload" : "Reload",
+        "later" : "Later",
+        "updated": "Found New Version Available"
+    }
+}

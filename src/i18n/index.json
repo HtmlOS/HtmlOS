@@ -1,0 +1,17 @@
+[
+  {
+    "isoName": "English",
+    "nativeName": "English",
+    "tags": "en"
+  },
+  {
+    "isoName": "Chinese (Simplified)",
+    "nativeName": "中文(简体)",
+    "tags": "zh"
+  },
+  {
+    "isoName": "Chinese (Traditional)",
+    "nativeName": "中文(繁體)",
+    "tags": "zh-Hant"
+  }
+]
