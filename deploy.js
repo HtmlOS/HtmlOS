@@ -1,6 +1,25 @@
+const fs = require("fs");
 const path = require("path");
 const spawn = require("cross-spawn");
 const pkg = require("./package.json");
+
+function delDir(file) {
+  if (fs.statSync(file).isDirectory()) {
+    const list = fs.readdirSync(file);
+    list.forEach((v, i) => {
+      const url = file + "/" + v;
+      const stats = fs.statSync(url);
+      if (stats.isFile()) {
+        fs.unlinkSync(url);
+      } else {
+        arguments.callee(url);
+      }
+    });
+    fs.rmdirSync(file);
+  } else {
+    fs.unlinkSync(file);
+  }
+}
 
 function shell(command, directory) {
   console.log("$ " + command);
@@ -25,6 +44,8 @@ function shell(command, directory) {
 (function() {
   shell("yarn lint");
   shell("yarn build");
+
+  delDir(path.resolve(process.cwd(), "./dist/blog/.git"));
 
   const commands = [
     "git config user.name 'Robotism'",
