@@ -58,16 +58,15 @@ class Blog {
     const lines = content.split("\n");
     const temp: Array<string> = [];
     let titled = false;
-    for (let line of lines) {
-      line = line.trim();
+    for (const line of lines) {
       // 判断是否是注释, 如果是则跳过
       const pc = /^<!--(.[^-]*(?=-->))-->$/;
-      if (pc.test(line) === true) {
+      if (pc.test(line.trim()) === true) {
         continue;
       }
       // 判断是否是 '# 标题'
       const pt = /^#+\s+(.*)$/;
-      if (temp.length === 0 && pt.test(line) === true) {
+      if (temp.length === 0 && pt.test(line.trim()) === true) {
         // 检查这个标题是否与this.title 相同, 如果相同, 则跳过
         if (titled === false && RegExp.$1 === this.title) {
           titled = true;
@@ -102,7 +101,10 @@ class Blog {
     return (this.content = this.fixedData(content));
   }
 
-  fetchContent(hook: (src?: string, md?: string) => void) {
+  fetchContent(
+    hook: (src?: string, md?: string) => void,
+    err: (e: any) => void
+  ) {
     if (this.content) {
       hook(this.content);
     } else {
@@ -114,7 +116,7 @@ class Blog {
           const src = this.parseContent(content);
           hook(src, this.fixUrl(src));
         })
-        .catch(error => console.error(error));
+        .catch(error => err(error));
     }
   }
 
@@ -141,6 +143,14 @@ class BlogManager {
       this.blogs.push(new Blog(blog));
     }
     console.log(this.blogs);
+  }
+
+  static findByName(name: string): Blog | undefined {
+    for (const blog of this.blogs) {
+      if (blog.name === name) {
+        return blog;
+      }
+    }
   }
 
   static tree() {}

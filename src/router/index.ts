@@ -5,15 +5,20 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/article",
-    name: "Article",
-    component: () => import("@/views/blog/BlogArticle.vue")
-  },
-  {
     path: "/blog",
     name: "Blog",
     component: () => import("@/views/blog/Blog.vue"),
     children: [
+      {
+        path: "article",
+        name: "BlogArticleEmpty",
+        component: () => import("@/views/blog/BlogArticle.vue")
+      },
+      {
+        path: "article/*",
+        name: "BlogArticle",
+        component: () => import("@/views/blog/BlogArticle.vue")
+      },
       {
         path: "articles",
         name: "BlogArticles",
@@ -48,7 +53,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "*",
-    component: () => import("@/views/error/404.vue")
+    redirect: "/"
   }
 ];
 

@@ -11,11 +11,10 @@ const Markdown = function(content) {
     lines: content.split("\n"),
 
     title() {
-      for (let line of this.lines) {
-        line = line.trim();
+      for (const line of this.lines) {
         const pc = new RegExp(REGEX_COMMENT, "gim");
         const pt = new RegExp(REGEX_TITLE, "gim");
-        if (pc.test(line) !== true && pt.test(line) === true) {
+        if (!pc.test(line.trim()) && pt.test(line.trim())) {
           return RegExp.$1;
         }
       }
@@ -23,64 +22,64 @@ const Markdown = function(content) {
 
     excerpt() {
       const temp = [];
-      
-      let moreLineNumber= -1;
+
+      let moreLineNumber = -1;
       for (let i in this.lines) {
-        const line = this.lines[i].trim();
+        const line = this.lines[i];
+
+        // 标记行号
+        const pm = new RegExp(REGEX_MORE, "gim");
+        if (pm.test(line.trim())) {
+          moreLineNumber = parseInt(i, 10);
+          break;
+        }
         
         // 抛弃注释
-        const pc = new RegExp(REGEX_COMMENT, "g");
-        if (pc.test(line) === true) {
+        const pc = new RegExp(REGEX_COMMENT, "gim");
+        if (pc.test(line.trim())) {
           continue;
         }
 
         temp.push(line);
-        // 标记行号
-        const pm = new RegExp(REGEX_MORE, "g");
-        if (pm.test(line)) {
-          moreLineNumber = parseInt(i, 10);
-          break;
-        }
       }
 
-      if(moreLineNumber >=0){
+      if (moreLineNumber >= 0) {
         // 发现 more 注释 行号, 返回摘要
         return temp.join("\n");
       }
 
       // 没有发现 more 注释, 开始自动生成摘要流程
-      const friendlyCount = 5;
-      let holder=[];
-      let block=[];
+      const friendlyBLockCount = 2;
+      let holder = [];
+      let block = [];
+      let blockCount = 0;
 
-      for(const line of temp){
-        if(line=== ""){
-          const totalCount = holder.length+ block.length;
-          if(totalCount >=friendlyCount){
+      for (const line of temp) {
+        if (line === "") {
+          blockCount++;
+          if (blockCount >= friendlyBLockCount) {
             return holder.join("\n");
-          }else{
+          } else {
             holder = holder.concat(block);
           }
-          block =[];
-        }else{
+          block = [];
+        } else {
           block.push(line);
         }
       }
-
     },
 
     attributes() {
       const list = {};
       const pc = new RegExp(REGEX_COMMENT, "gim");
       while (pc.test(this.content)) {
-        let line = RegExp.$1.trim();
+        const line = RegExp.$1.trim();
         if (line.indexOf(":") < 0) {
           continue;
         }
-        console.log(line);
         const key = line.split(":")[0].trim();
         const value = line.split(":")[1].trim();
-        if(key !== "" && value !== ""){
+        if (key !== "" && value !== "") {
           list[key] = value;
         }
       }
