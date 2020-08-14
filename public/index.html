@@ -20,30 +20,7 @@
           Please enable it to continue.</strong
         >
       </noscript>
-
-      <!-- jinrishici -->
-      <div class="jinrishici" id="poem_sentence"></div>
-      <script
-        src="https://sdk.jinrishici.com/v2/browser/jinrishici.js"
-        charset="utf-8"
-      ></script>
-      <script type="text/javascript">
-        var lang = navigator.language.toLocaleLowerCase();
-        if (
-          lang.indexOf("zh") > 0 ||
-          lang.indexOf("cn") > 0 ||
-          lang.indexOf("hans") > 0
-        ) {
-          jinrishici.load(function(result) {
-            var sentence = document.querySelector("#poem_sentence");
-            if(sentence){
-              sentence.innerHTML = result.data.content;
-            }
-          });
-        }
-      </script>
     </div>
-
     <!-- vue -->
     <div id="app"></div>
     <!-- built files will be auto injected -->

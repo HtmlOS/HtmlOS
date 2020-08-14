@@ -17,24 +17,7 @@
         <q-card class="fill-parent">
           <markdown class="item-title" :content="`# ${item.title}`" />
 
-          <q-item>
-            <q-chip
-              square
-              size="sm"
-              class="item-date"
-              icon="alarm"
-              :label="item.updated.format('yyyy-MM-dd HH:mm')"
-            />
-            <q-chip
-              v-for="(tag, index) in item.tags"
-              :key="index"
-              square
-              size="sm"
-              color="orange"
-              text-color="white"
-              >{{ tag }}</q-chip
-            >
-          </q-item>
+          <blog-tags :blog="item"></blog-tags>
 
           <q-separator inset />
 
@@ -75,9 +58,10 @@
 import { BlogManager } from "@/plugins/blog";
 
 import Markdown from "@/components/editor/Markdown";
+import BlogTags from "@/components/blog/BlogTags";
 
 export default {
-  components: { Markdown },
+  components: { Markdown, BlogTags },
   data() {
     return {
       blogs: [],
@@ -90,7 +74,7 @@ export default {
   methods: {
     openblog(blog) {
       this.$router.push({
-        path: `/blog/article/${blog.name}`
+        path: `/blog/articles/${blog.name}`
       });
     },
     loadMore() {

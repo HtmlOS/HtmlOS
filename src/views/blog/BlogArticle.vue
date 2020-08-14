@@ -2,25 +2,9 @@
   <div>
     <!-- content -->
     <div class="fill-parent" v-if="blog !== undefined">
-      <markdown class="item-title" :content="`# ${blog.title}`" style="" />
+      <markdown class="item-title" :content="`# ${blog.title}`" />
 
-      <q-item>
-        <q-chip
-          square
-          size="sm"
-          icon="alarm"
-          :label="blog.updated.format('yyyy-MM-dd HH:mm')"
-        />
-        <q-chip
-          v-for="(tag, index) in blog.tags"
-          :key="index"
-          square
-          size="sm"
-          color="orange"
-          text-color="white"
-          >{{ tag }}</q-chip
-        >
-      </q-item>
+      <blog-tags :blog="blog"></blog-tags>
 
       <q-separator inset style="margin-bottom: 24px" v-if="content !== ''" />
 
@@ -39,12 +23,13 @@
 <style lang="scss" scoped></style>
 
 <script>
-import Markdown from "@/components/editor/Markdown";
-
 import { BlogManager } from "@/plugins/blog";
 
+import Markdown from "@/components/editor/Markdown";
+import BlogTags from "@/components/blog/BlogTags";
+
 export default {
-  components: { Markdown },
+  components: { Markdown, BlogTags },
   data() {
     return {
       loading: true,

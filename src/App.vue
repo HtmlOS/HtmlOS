@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <q-ajax-bar position="top" color="accent" size="10px" />
     <!-- Route  -->
     <router-view />
     <!-- ServiceWorker Updated Reload -->
@@ -22,6 +23,7 @@ export default {
       const loading = document.getElementById("boot-loading");
       if (loading) {
         setTimeout(() => {
+          // TODO fade-out 需要补充
           loading.className = "fade-out";
           document.body.removeChild(loading);
         });

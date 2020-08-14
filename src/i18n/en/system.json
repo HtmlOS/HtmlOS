@@ -1,10 +1,10 @@
 {
-    "site":{
-        "name":"GankCode"
-    },
-    "sw": {
-        "reload" : "Reload",
-        "later" : "Later",
-        "updated": "Found New Version Available"
-    }
+  "site": {
+    "name": "GankCode"
+  },
+  "sw": {
+    "reload": "Reload",
+    "later": "Later",
+    "updated": "Found New Version Available"
+  }
 }

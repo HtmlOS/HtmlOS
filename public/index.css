@@ -1,172 +1,171 @@
-html, body {
-    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "MicrosoftYaHei", "WenQuanYi Micro Hei", sans-serif;
+html,
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Heiti SC", "MicrosoftYaHei", "WenQuanYi Micro Hei",
+    sans-serif;
 
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    border: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 
-.jinrishici{
-    position: fixed;
-    bottom: 16px;
-    text-align: center;
-    color: #ffffff;
+.jinrishici {
+  position: fixed;
+  bottom: 16px;
+  text-align: center;
+  color: #ffffff;
 }
-
 
 #boot-loading {
-    /* 全屏 */
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    /* 高层级 */
-    z-index: 999999999;
-    /* 超出隐藏 */
-    overflow: hidden;
+  /* 全屏 */
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  /* 高层级 */
+  z-index: 999999999;
+  /* 超出隐藏 */
+  overflow: hidden;
 
-    /* 排版*/
-    display: flex;
-    display: -webkit-flex;
-    flex-direction: column;
-    /* 居中 */
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    justify-content: center;
+  /* 排版*/
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  /* 居中 */
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-content: center;
 
-    /* 动画 */
-    animation: boot-loading 15s infinite;
-    -webkit-animation: boot-loading 15s infinite;
+  /* 动画 */
+  animation: boot-loading 15s infinite;
+  -webkit-animation: boot-loading 15s infinite;
 
-    /* 禁止鼠标事件 */
-    pointer-events: none;
+  /* 禁止鼠标事件 */
+  pointer-events: none;
 }
 
 @-webkit-keyframes boot-loading {
-    0% {
-        background-color: #e74c3c;
-    }
-    20% {
-        background-color: #f1c40f;
-    }
-    40% {
-        background-color: #1abc9c;
-    }
-    60% {
-        background-color: #3498db;
-    }
-    80% {
-        background-color: #9b59b6;
-    }
-    100% {
-        background-color: #e74c3c;
-    }
+  0% {
+    background-color: #e74c3c;
+  }
+  20% {
+    background-color: #f1c40f;
+  }
+  40% {
+    background-color: #1abc9c;
+  }
+  60% {
+    background-color: #3498db;
+  }
+  80% {
+    background-color: #9b59b6;
+  }
+  100% {
+    background-color: #e74c3c;
+  }
 }
 
 @keyframes boot-loading {
-    0% {
-        background-color: #e74c3c;
-    }
-    20% {
-        background-color: #f1c40f;
-    }
-    40% {
-        background-color: #1abc9c;
-    }
-    60% {
-        background-color: #3498db;
-    }
-    80% {
-        background-color: #9b59b6;
-    }
-    100% {
-        background-color: #e74c3c;
-    }
+  0% {
+    background-color: #e74c3c;
+  }
+  20% {
+    background-color: #f1c40f;
+  }
+  40% {
+    background-color: #1abc9c;
+  }
+  60% {
+    background-color: #3498db;
+  }
+  80% {
+    background-color: #9b59b6;
+  }
+  100% {
+    background-color: #e74c3c;
+  }
 }
-
 
 #boot-loading .spinner {
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-    height: 60px;
-    width: 60px;
-    background-color: rgba(250, 250, 250, 0.9);
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  height: 60px;
+  width: 60px;
+  background-color: rgba(250, 250, 250, 0.9);
 
-
-    -webkit-transform:scale(1.5);
-    -moz-transform:scale(1.5);
-    -o-transform:scale(1.5);
+  -webkit-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  -o-transform: scale(1.5);
 }
 
-
 #boot-loading .spinner-clock:before {
-    position: absolute;
-    top: 30px;
-    left: 27.5px;
-    content: "";
-    height: 35px;
-    width: 5px;
-    background-color: #535657;
-    transform-origin: 50% 0%;
-    border-radius: 8px;
-    animation: clock-min 2s linear infinite;
+  position: absolute;
+  top: 30px;
+  left: 27.5px;
+  content: "";
+  height: 35px;
+  width: 5px;
+  background-color: #535657;
+  transform-origin: 50% 0%;
+  border-radius: 8px;
+  animation: clock-min 2s linear infinite;
 }
 
 #boot-loading .spinner-clock:after {
-    position: absolute;
-    content: "";
-    height: 35px;
-    width: 2px;
-    top: 30px;
-    left: 29px;
-    transform-origin: 50% 0%;
-    background-color: #D1462F;
-    border-radius: 2px;
-    animation: clock-sec 0.5s linear infinite;
+  position: absolute;
+  content: "";
+  height: 35px;
+  width: 2px;
+  top: 30px;
+  left: 29px;
+  transform-origin: 50% 0%;
+  background-color: #d1462f;
+  border-radius: 2px;
+  animation: clock-sec 0.5s linear infinite;
 }
 
 #boot-loading .spinner-clock span {
-    position: absolute;
-    top: 10px;
-    left: 27.5px;
-    height: 20px;
-    width: 5px;
-    border-radius: 2px;
-    background: #535657;
-    transform-origin: 50% 100%;
-    animation: clock-hour 10s linear infinite;
+  position: absolute;
+  top: 10px;
+  left: 27.5px;
+  height: 20px;
+  width: 5px;
+  border-radius: 2px;
+  background: #535657;
+  transform-origin: 50% 100%;
+  animation: clock-hour 10s linear infinite;
 }
 
 @keyframes clock-hour {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes clock-min {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes clock-sec {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

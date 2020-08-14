@@ -1,12 +1,12 @@
 {
-    "search": "Search",
+  "search": "Search",
 
-    "copy": "Copy",
-    "cut": "Cut",
-    "paste": "Paste",
-    "delete": "Delete",
+  "copy": "Copy",
+  "cut": "Cut",
+  "paste": "Paste",
+  "delete": "Delete",
 
-    "about": "About",
+  "about": "About",
 
-    "":""
+  "": ""
 }
