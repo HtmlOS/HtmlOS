@@ -6,24 +6,26 @@
       :offset="250"
       :disable="offset >= total - 1"
     >
-      <q-item
-        v-for="(item, index) in items"
-        :key="index"
-        v-ripple
-        clickable
-        class="item-card"
-        @click="openblog(item)"
-      >
-        <q-card class="fill-parent">
-          <markdown class="item-title" :content="`# ${item.title}`" />
+      <q-list padding class="rounded-borders text-primary">
+        <q-item
+          v-for="(item, index) in items"
+          :key="index"
+          v-ripple
+          clickable
+          class="blog-card"
+          @click="openblog(item)"
+        >
+          <div class="fill-parent">
+            <markdown class="" :content="`# ${item.title}`" />
 
-          <blog-tags :blog="item"></blog-tags>
+            <blog-tags :blog="item"></blog-tags>
 
-          <q-separator inset />
+            <q-separator inset style="margin-bottom: 24px" />
 
-          <markdown class="item-content" :content="item.fixUrl(item.excerpt)" />
-        </q-card>
-      </q-item>
+            <markdown class="" :content="item.fixUrl(item.excerpt)" />
+          </div>
+        </q-item>
+      </q-list>
 
       <template v-slot:loading>
         <div class="row justify-center q-my-md">
@@ -35,22 +37,17 @@
 </template>
 
 <style lang="scss" scoped>
-.item-card {
+.blog-card {
   width: 100%;
-  padding: 0px;
-  margin: 16px;
+  padding: 8px;
+  margin-bottom: 16px;
+
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(241, 154, 83, 0.2);
 }
-.item-title {
-  margin-top: 8px;
-  margin-left: 24px;
-  margin-right: 24px;
-}
-.item-date {
-  margin-left: 8px;
-  margin-right: 16px;
-}
-.item-content {
-  margin: 16px;
+
+.blog-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(241, 154, 83, 0.2);
 }
 </style>
 
@@ -73,9 +70,11 @@ export default {
   },
   methods: {
     openblog(blog) {
-      this.$router.push({
-        path: `/blog/articles/${blog.name}`
-      });
+      setTimeout(() => {
+        this.$router.push({
+          path: `/blog/articles/${blog.name}`
+        });
+      }, 300);
     },
     loadMore() {
       if (this.offset >= this.total - 1) {

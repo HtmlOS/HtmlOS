@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="fill-parent blog">
     <!-- content -->
     <div class="fill-parent" v-if="blog !== undefined">
-      <markdown class="item-title" :content="`# ${blog.title}`" />
+      <markdown class="" :content="`# ${blog.title}`" />
 
       <blog-tags :blog="blog"></blog-tags>
 
@@ -20,7 +20,11 @@
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.blog {
+  padding: 8px;
+}
+</style>
 
 <script>
 import { BlogManager } from "@/plugins/blog";

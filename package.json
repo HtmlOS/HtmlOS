@@ -52,7 +52,6 @@
     "prettier": "^1.19.1",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
-    "simple-git": "^2.17.0",
     "typescript": "~3.9.3",
     "vue-cli-plugin-quasar": "~2.0.2",
     "vue-template-compiler": "^2.6.11"

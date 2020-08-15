@@ -5,7 +5,9 @@
       本站正在积极开发中...
     </div>
     <q-parallax :height="240" :src="bg" :speed="0.7">
-      <h1 class="text-white">{{ $t("site.name") }}</h1>
+      <center>
+        <h2 class="text-white fill-width">{{ $t("site.name") }}</h2>
+      </center>
     </q-parallax>
     <div class="blog-container">
       <router-view />
@@ -19,11 +21,10 @@
   position: relative;
 }
 .blog-container {
-  position: absolute;
-  top: 256px;
-  left: 15%;
-  width: 70%;
+  width: 100%;
+  max-width: 768px;
   min-height: 50%;
+  margin: 0 auto;
 }
 </style>
 
