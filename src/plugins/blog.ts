@@ -57,21 +57,29 @@ class Blog {
     }
     const lines = content.split("\n");
     const temp: Array<string> = [];
-    let titled = false;
+    let processTitle = false;
+    let processVideo = false;
     for (const line of lines) {
       // 判断是否是注释, 如果是则跳过
       const pc = /^<!--(.[^>]*(?=-->))-->$/;
-      if (pc.test(line.trim()) === true) {
+      if (pc.test(line.trim())) {
         continue;
       }
       // 判断是否是 '# 标题'
       const pt = /^#+\s+(.*)$/;
-      if (titled === false && pt.test(line.trim()) === true) {
+      if (processTitle === false && pt.test(line.trim())) {
         // 检查这个标题是否与this.title 相同, 如果相同, 则跳过
         if (RegExp.$1.trim() === this.title.trim()) {
-          titled = true;
+          processTitle = true;
           continue;
         }
+      }
+      if (/^\s*<!--\s*video\s$/.test(line)) {
+        processVideo = true;
+        continue;
+      } else if (processVideo && /^\s*-->\s*$/.test(line)) {
+        processVideo = false;
+        continue;
       }
 
       // 不需要第一个空行
