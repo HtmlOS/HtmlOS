@@ -1,5 +1,5 @@
 const REGEX_MORE = /<!--\s*more\s*-->/;
-const REGEX_COMMENT = /<!--(.[^-]*(?=-->))-->/;
+const REGEX_COMMENT = /<!--(.[^>]*(?=-->))-->/;
 const REGEX_IMAGE = /!\[([^\]]*)\]\(([^)]*)\)/;
 
 const REGEX_TITLE = /#+\s+(.*)/;
@@ -77,8 +77,8 @@ const Markdown = function(content) {
         if (line.indexOf(":") < 0) {
           continue;
         }
-        const key = line.split(":")[0].trim();
-        const value = line.split(":")[1].trim();
+        const key = line.substr(0, line.indexOf(":")).trim();
+        const value = line.substr(line.indexOf(":")+1).trim();
         if (key !== "" && value !== "") {
           list[key] = value;
         }
