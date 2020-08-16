@@ -49,7 +49,7 @@ const Markdown = function(content) {
       }
 
       // 没有发现 more 注释, 开始自动生成摘要流程
-      const friendlyBLockCount = 2;
+      const friendlyBlockCount = 2;
       let holder = [];
       let block = [];
       let blockCount = 0;
@@ -57,7 +57,7 @@ const Markdown = function(content) {
       for (const line of temp) {
         if (line === "") {
           blockCount++;
-          if (blockCount >= friendlyBLockCount) {
+          if (blockCount >= friendlyBlockCount) {
             return holder.join("\n");
           } else {
             holder = holder.concat(block);
