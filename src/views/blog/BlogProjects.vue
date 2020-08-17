@@ -1,9 +1,11 @@
 <template>
-  <div>BlogCategories</div>
+  <div>BlogTags</div>
 </template>
 
 <script>
 export default {
-  data() {}
+  data() {
+    return {};
+  }
 };
 </script>

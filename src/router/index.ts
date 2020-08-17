@@ -30,9 +30,9 @@ const routes: Array<RouteConfig> = [
         component: () => import("@/views/blog/BlogArchive.vue")
       },
       {
-        path: "tags",
-        name: "BlogTags",
-        component: () => import("@/views/blog/BlogTags.vue")
+        path: "projects",
+        name: "BlogProjects",
+        component: () => import("@/views/blog/BlogProjects.vue")
       },
       {
         path: "about",

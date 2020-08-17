@@ -1,6 +1,12 @@
 {
   "blog": {
     "created": "Created",
-    "updated": "Updated"
+    "updated": "Updated",
+    "nav":{
+      "articles":"Blogs",
+      "archive":"Archive",
+      "projects":"Projects",
+      "about":"About"
+    }
   }
 }

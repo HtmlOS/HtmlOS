@@ -1,34 +1,33 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <!-- <q-header elevated class="bg-primary text-white">
+    <q-header elevated class="bg-primary text-white">
       <q-toolbar>
-        <q-toolbar-title>
+        <q-toolbar-title dense>
           <q-avatar>
-            <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
+            <img src="/favicon.ico" />
           </q-avatar>
-          Title
+          {{ $t("site.name") }}
         </q-toolbar-title>
+        <div style="margin-right: 24px;">本站正在积极开发中...</div>
+        <q-tabs align="left">
+          <q-route-tab to="/blog/articles" :label="$t('blog.nav.articles')" />
+          <q-route-tab to="/blog/archive" :label="$t('blog.nav.archive')" />
+          <q-route-tab to="/blog/projects" :label="$t('blog.nav.projects')" />
+          <q-route-tab to="/blog/about" :label="$t('blog.nav.about')" />
+        </q-tabs>
       </q-toolbar>
-    </q-header> -->
+    </q-header>
 
     <q-page-container>
       <!-- ${require('@/assets/images/bg1.jpg') -->
       <div class="fill-parent blog-root">
-        <div class="text-green absolute" style="z-index: 99999;">
-          本站正在积极开发中...
-        </div>
-        <q-parallax :height="240" :src="bg" :speed="0.7">
-          <center>
-            <h2 class="text-white fill-width">{{ $t("site.name") }}</h2>
-          </center>
-        </q-parallax>
         <div class="blog-container">
           <router-view />
         </div>
       </div>
     </q-page-container>
 
-    <q-footer elevated class="bg-grey-8 text-white">
+    <!-- <q-footer elevated class="bg-grey-8 text-white">
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar>
@@ -37,7 +36,7 @@
           Title
         </q-toolbar-title>
       </q-toolbar>
-    </q-footer>
+    </q-footer> -->
   </q-layout>
 </template>
 

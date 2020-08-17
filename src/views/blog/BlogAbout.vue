@@ -1,9 +1,15 @@
 <template>
-  <div>BlogAbout</div>
+  <div>
+    Full Stack Developer
+  </div>
 </template>
 
 <script>
 export default {
-  data() {}
+  data() {
+    return {
+      content: ""
+    };
+  }
 };
 </script>

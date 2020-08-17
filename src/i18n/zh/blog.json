@@ -1,6 +1,12 @@
 {
   "blog": {
     "created": "创建",
-    "updated": "修改"
+    "updated": "修改",
+    "nav":{
+      "articles":"博文",
+      "archive":"归档",
+      "projects":"开源项目",
+      "about":"关于作者"
+    }
   }
 }
