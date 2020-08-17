@@ -2,14 +2,14 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
-        <q-toolbar-title dense>
-          <q-avatar>
-            <img src="/favicon.ico" />
-          </q-avatar>
-          {{ $t("site.name") }}
-        </q-toolbar-title>
-        <div style="margin-right: 24px;">本站正在积极开发中...</div>
-        <q-tabs align="left">
+        <q-avatar>
+          <img src="/favicon.ico" />
+        </q-avatar>
+        <div class="tool-bar-title" v-if="$q.screen.gt.xs">
+          <strong>{{ $t("site.name") }} </strong>
+        </div>
+        <q-space />
+        <q-tabs align="left" style="min-width: 320px">
           <q-route-tab to="/blog/articles" :label="$t('blog.nav.articles')" />
           <q-route-tab to="/blog/archive" :label="$t('blog.nav.archive')" />
           <q-route-tab to="/blog/projects" :label="$t('blog.nav.projects')" />
@@ -41,15 +41,25 @@
 </template>
 
 <style lang="scss" scoped>
+.tool-bar-title {
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 18px;
+  white-space: nowrap;
+}
 .blog-root {
   overflow-y: auto;
   position: relative;
 }
 .blog-container {
   width: 100%;
-  max-width: 768px;
   min-height: 50%;
   margin: 0 auto;
+}
+.blog-page {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 8px;
 }
 </style>
 

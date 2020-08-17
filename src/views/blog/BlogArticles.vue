@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div class="fill-parent blog-page">
     <!-- http://www.quasarchs.com/vue-components/infinite-scroll 无线滚动 -->
     <q-infinite-scroll
       @load="onLoad"

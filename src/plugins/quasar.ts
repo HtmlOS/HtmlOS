@@ -14,7 +14,7 @@ Vue.use(Quasar, {
   config: {
     loadingBar: {
       color: "purple",
-      size: "8px",
+      size: "6px",
       position: "top"
     }
   },
