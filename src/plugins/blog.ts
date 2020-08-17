@@ -115,15 +115,19 @@ class Blog {
     err: (e: any) => void
   ) {
     if (this.content) {
-      hook(this.content);
+      if (hook) {
+        hook(this.content, this.fixUrl(this.content));
+      }
     } else {
       fetch(this.file)
         .then(response => {
           return response.text();
         })
         .then(content => {
-          const src = this.parseContent(content);
-          hook(src, this.fixUrl(src));
+          if (hook) {
+            const src = this.parseContent(content);
+            hook(src, this.fixUrl(src));
+          }
         })
         .catch(error => err(error));
     }

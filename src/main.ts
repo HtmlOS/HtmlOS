@@ -7,7 +7,14 @@ import store from "./store";
 Vue.config.productionTip = false;
 
 // Quasar
-import "./plugins/quasar";
+import { LoadingBar } from "./plugins/quasar";
+router.beforeEach((to, from, next) => {
+  LoadingBar.start();
+  next();
+});
+router.afterEach(() => {
+  LoadingBar.stop();
+});
 
 // 国际化
 import Intl from "@/plugins/i18n";

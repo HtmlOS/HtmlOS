@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <q-ajax-bar position="top" color="accent" size="10px" />
     <!-- Route  -->
     <router-view />
     <!-- ServiceWorker Updated Reload -->
@@ -33,7 +32,6 @@ export default {
   mounted() {
     // 加载完毕, 移除 /public/index.html 中的加载动画
     this.removeLoading();
-  },
-  destroyed() {}
+  }
 };
 </script>

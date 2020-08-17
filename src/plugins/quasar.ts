@@ -4,20 +4,26 @@ import "../styles/quasar.scss";
 import "quasar/dist/quasar.ie.polyfills";
 import "@quasar/extras/fontawesome-v5/fontawesome-v5.css";
 import "@quasar/extras/material-icons/material-icons.css";
-import { Quasar } from "quasar";
+import { Quasar, LoadingBar } from "quasar";
 
 import Intl from "./i18n";
 import Bcp47 from "./bcp47";
 
 Vue.use(Quasar, {
-  config: {},
+  plugins: [LoadingBar],
+  config: {
+    loadingBar: {
+      color: "purple",
+      size: "8px",
+      position: "top"
+    }
+  },
   components: {
     /* not needed if importStrategy is not 'manual' */
   },
   directives: {
     /* not needed if importStrategy is not 'manual' */
-  },
-  plugins: {}
+  }
 });
 
 class QuasarV {
@@ -58,3 +64,5 @@ QuasarV.setLanguage(Intl.locale);
 Intl.addLocaleChangedListener((lang: string) => {
   QuasarV.setLanguage(lang);
 });
+
+export { QuasarV, LoadingBar };

@@ -1,21 +1,21 @@
 <template>
   <div class="fill-parent blog">
     <!-- content -->
-    <div class="fill-parent" v-if="blog !== undefined">
-      <markdown class="" :content="`# ${blog.title}`" />
+    <div class="fill-parent">
+      <markdown :content="`# ${blog.title}`" v-if="blog !== undefined" />
 
-      <blog-tags :blog="blog"></blog-tags>
+      <blog-tags :blog="blog" v-if="blog !== undefined"></blog-tags>
 
-      <q-separator inset style="margin-bottom: 24px" v-if="content !== ''" />
+      <q-separator inset style="margin-bottom: 24px" />
 
-      <markdown class="fill-parent" :content="content" v-if="content !== ''" />
+      <markdown class="fill-parent" :content="content" />
 
-      <q-separator inset style="margin-bottom: 24px" v-if="content !== ''" />
+      <q-separator inset style="margin-bottom: 24px" />
     </div>
 
     <!-- loadding ani -->
     <q-inner-loading :showing="loading">
-      <q-spinner-ball size="50px" color="primary" />
+      <q-spinner-hourglass size="32px" color="purple" />
     </q-inner-loading>
   </div>
 </template>
