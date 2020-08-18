@@ -14,13 +14,13 @@ export const LoveHeart = {
       alpha: 1,
       color: randomColor()
     };
-    document.addEventListener("contextmenu", function(event) {
-      const e = event || window.event;
-      e.preventDefault();
-      e.stopPropagation();
-      e.cancelBubble = true;
-      e.returnValue = false;
-    });
+    // document.addEventListener("contextmenu", function(event) {
+    //   const e = event || window.event;
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    //   e.cancelBubble = true;
+    //   e.returnValue = false;
+    // });
 
     anchor.appendChild(divHeart);
 

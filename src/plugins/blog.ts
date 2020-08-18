@@ -58,7 +58,7 @@ class Blog {
     const lines = content.split("\n");
     const temp: Array<string> = [];
     let processTitle = false;
-    let processVideo = false;
+    let processIframe = false;
     for (const line of lines) {
       // 判断是否是注释, 如果是则跳过
       const pc = /^<!--(.[^>]*(?=-->))-->$/;
@@ -74,11 +74,11 @@ class Blog {
           continue;
         }
       }
-      if (/^\s*<!--\s*video\s$/.test(line)) {
-        processVideo = true;
+      if (/^\s*<!--\s*iframe\s*$/.test(line)) {
+        processIframe = true;
         continue;
-      } else if (processVideo && /^\s*-->\s*$/.test(line)) {
-        processVideo = false;
+      } else if (processIframe && /^\s*-->\s*$/.test(line)) {
+        processIframe = false;
         continue;
       }
 
