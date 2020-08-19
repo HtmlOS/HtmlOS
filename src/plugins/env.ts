@@ -1,7 +1,8 @@
 const AppEnv: any = JSON.parse(process.env.VUE_APP_ENV || "{}");
 AppEnv.blogs.sort((a: any, b: any) => {
-  new Date(a.created).getTime() - new Date(b.created).getTime();
+  return new Date(b.created).getTime() - new Date(a.created).getTime();
 });
+
 Object.defineProperty(Date.prototype, "format", {
   value: function(fmt: string) {
     const o: any = {
