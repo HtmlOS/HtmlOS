@@ -1,8 +1,10 @@
 # HtmlOS Home Page
 
-> 本站正在建设中, 敬请期待...
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e5701df2-6cdd-4faa-a1ea-5d9af84d536c/deploy-status)](https://app.netlify.com/sites/gankcode/deploys) 
 
-# WebSite publish @ https://gankcode.com
+`本站正在建设中, 敬请期待...`
+
+### WebSite publish @ https://gankcode.com
 
 
 ## Features
