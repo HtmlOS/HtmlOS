@@ -64,7 +64,7 @@ export default {
                 }
               }
             } catch (e) {
-              console.log(e);
+              console.error(e);
             }
             return `<pre class="${cls}"><code>${fixed || str}</code></pre>`;
           }

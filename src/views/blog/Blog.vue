@@ -2,19 +2,41 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
+        <!-- http://www.quasarchs.com/style/visibility -->
+        <!-- http://www.quasarchs.com/options/platform-detection -->
         <q-avatar>
           <img src="/favicon.ico" />
         </q-avatar>
-        <div class="tool-bar-title" v-if="$q.screen.gt.xs">
-          <strong>{{ $t("site.name") }} </strong>
+        <div class="tool-bar-title">
+          <strong>{{ $t("site.name") }}</strong>
         </div>
         <q-space />
-        <q-tabs align="left" style="min-width: 320px">
-          <q-route-tab to="/blog/articles" :label="$t('blog.nav.articles')" />
-          <q-route-tab to="/blog/archive" :label="$t('blog.nav.archive')" />
-          <q-route-tab to="/blog/projects" :label="$t('blog.nav.projects')" />
-          <q-route-tab to="/blog/about" :label="$t('blog.nav.about')" />
+        <q-tabs align="left" v-if="$q.screen.gt.xs">
+          <q-route-tab
+            v-for="(page, index) in pages"
+            :key="index"
+            :to="page.route"
+            :label="$t(page.name)"
+          />
         </q-tabs>
+        <q-btn dense flat round icon="menu" v-if="!$q.screen.gt.xs">
+          <q-menu>
+            <q-list :style="`max-width: ${$q.screen.gt}px`">
+              <q-item
+                clickable
+                v-for="(page, index) in pages"
+                :key="index"
+                @click="$router.push(page.route)"
+              >
+                <q-item-section>{{ $t(page.name) }}</q-item-section>
+              </q-item>
+              <q-separator />
+              <q-item clickable>
+                <q-item-section>...</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -36,7 +58,7 @@
           Title
         </q-toolbar-title>
       </q-toolbar>
-    </q-footer> -->
+    </q-footer>-->
   </q-layout>
 </template>
 
@@ -69,7 +91,25 @@ import { LoveHeart } from "@/plugins/loveheart";
 export default {
   data() {
     return {
-      bg: require("@/assets/images/bg1.jpg")
+      bg: require("@/assets/images/bg1.jpg"),
+      pages: [
+        {
+          name: "blog.nav.articles",
+          route: "/blog/articles"
+        },
+        {
+          name: "blog.nav.archive",
+          route: "/blog/archive"
+        },
+        {
+          name: "blog.nav.projects",
+          route: "/blog/projects"
+        },
+        {
+          name: "blog.nav.about",
+          route: "/blog/about"
+        }
+      ]
     };
   },
   methods: {},

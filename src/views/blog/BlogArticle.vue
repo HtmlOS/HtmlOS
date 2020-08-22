@@ -6,11 +6,11 @@
 
       <blog-tags :blog="blog" v-if="blog !== undefined"></blog-tags>
 
-      <q-separator inset style="margin-bottom: 24px" />
+      <q-separator style="margin-bottom: 24px" />
 
       <markdown class="fill-parent" :content="content" />
 
-      <q-separator inset style="margin-bottom: 24px" />
+      <q-separator style="margin-top: 24px; margin-bottom: 24px" />
     </div>
 
     <!-- loadding ani -->

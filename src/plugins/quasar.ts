@@ -4,13 +4,13 @@ import "../styles/quasar.scss";
 import "quasar/dist/quasar.ie.polyfills";
 import "@quasar/extras/fontawesome-v5/fontawesome-v5.css";
 import "@quasar/extras/material-icons/material-icons.css";
-import { Quasar, LoadingBar } from "quasar";
+import { Quasar, Platform, LoadingBar } from "quasar";
 
 import Intl from "./i18n";
 import Bcp47 from "./bcp47";
 
 Vue.use(Quasar, {
-  plugins: [LoadingBar],
+  plugins: [LoadingBar, Platform],
   config: {
     loadingBar: {
       color: "purple",
@@ -44,7 +44,7 @@ class QuasarV {
         Quasar.lang.set(lang.default);
       });
     } else {
-      console.log(`not found language <${lang}> match in quasar`);
+      console.error(`not found language <${lang}> match in quasar`);
     }
   }
 }

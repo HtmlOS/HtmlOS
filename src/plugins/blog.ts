@@ -1,7 +1,7 @@
 import AppEnv from "./env";
 
-const getAttributes = function(str: string): Array<string> {
-  const array = str ? str.split(",") : [];
+const getAttributes = function(str: string, splitor?: string): Array<string> {
+  const array = str ? str.split(splitor || ",") : [];
   const list: Array<string> = [];
   for (let item of array) {
     item = item.trim();
@@ -10,6 +10,23 @@ const getAttributes = function(str: string): Array<string> {
     }
   }
   return list;
+};
+
+const megerList = function(l: Array<string>, r: Array<string>): Array<string> {
+  const temp: Array<string> = [];
+  const all = r.concat(l);
+  for (const item of all) {
+    if (item === undefined || item === null || item.length === 0) {
+      continue;
+    }
+    if(item === "blog"){
+      continue;
+    }
+    if (temp.indexOf(item) < 0) {
+      temp.push(item);
+    }
+  }
+  return temp;
 };
 
 class Blog {
@@ -39,10 +56,13 @@ class Blog {
     this.created = new Date(obj.created);
     this.updated = new Date(obj.updated);
     this.images = obj.images || [];
-    this.tags = getAttributes(obj.tags);
-    this.categories = getAttributes(obj.categories);
     this.excerpt = this.parseExcerpt(obj.excerpt);
     this.content = this.parseContent(obj.content);
+    this.categories = getAttributes(obj.categories);
+    this.tags = megerList(
+      getAttributes(obj.tags),
+      getAttributes(this.path, "/")
+    );
   }
 
   /**
@@ -120,16 +140,16 @@ class Blog {
       }
     } else {
       fetch(this.file)
-        .then(response => {
+        .then((response) => {
           return response.text();
         })
-        .then(content => {
+        .then((content) => {
           if (hook) {
             const src = this.parseContent(content);
             hook(src, this.fixUrl(src));
           }
         })
-        .catch(error => err(error));
+        .catch((error) => err(error));
     }
   }
 
