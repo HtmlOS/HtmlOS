@@ -25,10 +25,8 @@
 
 <script>
 import { BlogManager } from "@/plugins/blog";
-import Markdown from "@/components/editor/Markdown";
 
 export default {
-  components: { Markdown },
   data() {
     return {
       yyyys: [],

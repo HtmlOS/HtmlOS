@@ -6,6 +6,11 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
+
+// 自定义组件全局注册
+import Widget from "./plugins/widget";
+Vue.use(Widget);
+
 // Quasar
 import { LoadingBar } from "./plugins/quasar";
 router.beforeEach((to, from, next) => {

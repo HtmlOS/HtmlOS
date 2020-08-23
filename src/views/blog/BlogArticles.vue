@@ -54,11 +54,10 @@
 <script>
 import { BlogManager } from "@/plugins/blog";
 
-import Markdown from "@/components/editor/Markdown";
 import BlogTags from "@/components/blog/BlogTags";
 
 export default {
-  components: { Markdown, BlogTags },
+  components: { BlogTags },
   data() {
     return {
       blogs: [],
