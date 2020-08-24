@@ -4,9 +4,6 @@
       <q-toolbar>
         <!-- http://www.quasarchs.com/style/visibility -->
         <!-- http://www.quasarchs.com/options/platform-detection -->
-        <q-avatar>
-          <img src="/favicon.ico" />
-        </q-avatar>
         <div class="tool-bar-title">
           <strong>{{ $t("site.name") }}</strong>
         </div>
@@ -21,7 +18,7 @@
         </q-tabs>
         <q-btn dense flat round icon="menu" v-if="!$q.screen.gt.xs">
           <q-menu>
-            <q-list :style="`max-width: ${$q.screen.gt}px`">
+            <q-list style="min-width: 144px;">
               <q-item
                 clickable
                 v-for="(page, index) in pages"
@@ -32,7 +29,7 @@
               </q-item>
               <q-separator />
               <q-item clickable>
-                <q-item-section>...</q-item-section>
+                <q-item-section></q-item-section>
               </q-item>
             </q-list>
           </q-menu>
