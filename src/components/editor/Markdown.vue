@@ -29,35 +29,31 @@ const MD = new MarkdownIt({
   typographer: true,
   breaks: false,
   highlight: (str, lang) => {
-    let fixed = undefined;
+    let html = undefined;
     const cls = "hljs";
 
-    try {
-      if (!fixed && lang && hljs.getLanguage(lang)) {
+    if (lang) {
+      if (hljs.getLanguage(lang)) {
         try {
           const result = hljs.highlight(lang, str);
-          fixed = result.value;
+          html = result.value;
         } catch (__) {
           if (__) {
             __.toString();
           }
         }
       }
-
-      if (!fixed) {
-        try {
-          const result = hljs.highlightAuto(str);
-          fixed = result.value;
-        } catch (__) {
-          if (__) {
-            __.toString();
-          }
+    } else {
+      try {
+        const result = hljs.highlightAuto(str);
+        html = result.value;
+      } catch (__) {
+        if (__) {
+          __.toString();
         }
       }
-    } catch (e) {
-      console.error(e);
     }
-    return `<pre class="${cls}"><code>${fixed || str}</code></pre>`;
+    return `<pre class="${cls}"><code>${html || str}</code></pre>`;
   }
 }).use(MarkdownItEmoji);
 
@@ -73,10 +69,8 @@ export default {
   },
   methods: {
     load() {
-      setTimeout(() => {
-        this.$refs["markdown-it-container"].innerHTML =
-          MD.render(this.content) || "";
-      }, 10);
+      const container = this.$refs["markdown-it-container"];
+      container.innerHTML = MD.render(this.content) || "";
     }
   },
   mounted() {

@@ -57,7 +57,6 @@ class Blog {
     this.updated = new Date(obj.updated);
     this.images = obj.images || [];
     this.excerpt = this.parseExcerpt(obj.excerpt);
-    this.content = this.parseContent(obj.content);
     this.categories = getAttributes(obj.categories);
     this.tags = megerList(
       getAttributes(obj.tags),
@@ -134,23 +133,17 @@ class Blog {
     hook: (src?: string, md?: string) => void,
     err: (e: any) => void
   ) {
-    if (this.content) {
-      if (hook) {
-        hook(this.content, this.fixUrl(this.content));
-      }
-    } else {
-      fetch(this.file)
-        .then((response) => {
-          return response.text();
-        })
-        .then((content) => {
-          if (hook) {
-            const src = this.parseContent(content);
-            hook(src, this.fixUrl(src));
-          }
-        })
-        .catch((error) => err(error));
-    }
+    fetch(this.file)
+      .then((response) => {
+        return response.text();
+      })
+      .then((content) => {
+        if (hook) {
+          const src = this.parseContent(content);
+          hook(src, this.fixUrl(src));
+        }
+      })
+      .catch((error) => err(error));
   }
 
   fixUrl(content?: string, baseUrl?: string): string | undefined {
