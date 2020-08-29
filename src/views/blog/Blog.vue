@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view="hHh lpR fFf" class="light">
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <!-- http://www.quasarchs.com/style/visibility -->
@@ -7,7 +7,66 @@
         <div class="tool-bar-title">
           <strong>{{ $t("site.name") }}</strong>
         </div>
+
         <q-space />
+
+        <!-- search -->
+        <q-select
+          ref="search"
+          class="blog-search"
+          color="white"
+          bg-color="white"
+          filled
+          dense
+          standout
+          use-input
+          hide-selected
+          hide-dropdown-icon
+          v-model="search.model"
+          :loading="search.filtering"
+          :options="search.options"
+          @filter="searchFilter"
+        >
+          <template v-slot:prepend>
+            <q-icon name="search" />
+          </template>
+
+          <template v-slot:append>
+            <q-icon
+              v-if="
+                search.text !== undefined &&
+                  search.text !== null &&
+                  search.text !== ''
+              "
+              class="cursor-pointer"
+              name="clear"
+              @click.stop="searchClear"
+            />
+          </template>
+
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section>
+                <div class="text-center">{{ $t("blog.search.none") }}</div>
+              </q-item-section>
+            </q-item>
+          </template>
+
+          <template v-slot:option="scope">
+            <q-item v-bind="scope.itemProps" v-on="scope.itemEvents" @click="serchClick(scope.opt)">
+              <q-item-section side>
+                <q-icon name="collections_bookmark" style="margin: auto;" />
+              </q-item-section>
+              <q-item-section>
+                <markdown :content="scope.opt.label" />
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
+
+        <q-space />
+
+        <!-- menu -->
         <q-tabs align="left" v-if="$q.screen.gt.xs">
           <q-route-tab
             v-for="(page, index) in pages"
@@ -41,7 +100,7 @@
       <!-- ${require('@/assets/images/bg1.jpg') -->
       <div class="fill-parent blog-root">
         <div class="blog-container">
-          <router-view />
+          <router-view :key="$route.path" />
         </div>
       </div>
     </q-page-container>
@@ -66,6 +125,15 @@
   font-size: 18px;
   white-space: nowrap;
 }
+
+.blog-search {
+  width: 32%;
+  min-width: 256px;
+  line-height: 24px;
+  margin: 2px;
+  overflow: hidden;
+}
+
 .blog-root {
   overflow-y: auto;
   position: relative;
@@ -84,6 +152,8 @@
 
 <script>
 import { LoveHeart } from "@/plugins/loveheart";
+
+import { BlogManager } from "@/plugins/blog";
 
 export default {
   data() {
@@ -106,10 +176,56 @@ export default {
           name: "blog.nav.about",
           route: "/blog/about"
         }
-      ]
+      ],
+      search: {
+        text: "",
+        model: null,
+        filtering: false,
+        options: []
+      }
     };
   },
-  methods: {},
+  methods: {
+    searchClear() {
+      this.$refs.search.updateInputValue("", true);
+      // input.value = "" ;
+      this.search.filtering = false;
+      this.$refs.search.updateInputValue("");
+    },
+    searchFilter(val, doneFn, abortFn) {
+      this.search.text = val;
+      this.search.options = [];
+
+      if (val === undefined || val === null || val === "") {
+        abortFn();
+        return;
+      }
+      this.search.filtering = true;
+      const titles = [];
+      for (const blog of BlogManager.blogs) {
+        if (blog.title.toLowerCase().indexOf(val.toLowerCase().trim()) !== -1) {
+          titles.push({
+            blog: blog,
+            label: blog.title
+          });
+        }
+      }
+      doneFn(() => {
+        this.search.filtering = false;
+        this.search.options = titles;
+      });
+    },
+    serchClick(option) {
+      const blog = option.blog;
+      const path = `/blog/articles/${blog.name}`;
+      if (this.$route.path === path) {
+        return;
+      }
+      this.$router.push({
+        path: path
+      });
+    }
+  },
   mounted() {
     LoveHeart.attach();
   },

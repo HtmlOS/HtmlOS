@@ -7,6 +7,9 @@
       "archive":"Archive",
       "projects":"Projects",
       "about":"About"
+    },
+    "search":{
+      "none":"No matched results"
     }
   }
 }

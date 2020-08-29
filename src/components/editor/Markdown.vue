@@ -21,7 +21,16 @@ import MarkdownIt from "markdown-it";
 import MarkdownItEmoji from "markdown-it-emoji";
 
 import hljs from "highlight.js";
+
 import "highlight.js/styles/tomorrow.css";
+
+// const files = require.context("highlight.js/lib/languages", true, /.+\.js$/);
+// files.keys().forEach(iteme => {
+//   const file = iteme.substr(2);
+//   const name = file.substr(0, file.lastIndexOf("."));
+//   const lang = require("highlight.js/lib/languages/" + name);
+//   hljs.registerLanguage(name, lang);
+// });
 
 const MD = new MarkdownIt({
   html: true,
@@ -71,10 +80,34 @@ export default {
     load() {
       const container = this.$refs["markdown-it-container"];
       container.innerHTML = MD.render(this.content) || "";
+    },
+    loadToc() {
+      this.$nextTick(() => {
+        const container = this.$refs["markdown-it-container"];
+        const tree = [];
+        for (const element of container.childNodes) {
+          if (element.nodeType !== 1) {
+            continue;
+          }
+          const nodeName = element.nodeName.toLowerCase();
+          if (/^h[1-6]{1}$/.test(nodeName) !== true) {
+            continue;
+          }
+          const h = parseInt(nodeName.substr(1), 10);
+          tree.push({
+            h: h,
+            top: element.getBoundingClientRect().top,
+            name: element.innerText
+          });
+        }
+
+        console.log(tree);
+      });
     }
   },
   mounted() {
     this.load();
+    this.loadToc();
   },
   watch: {
     content: function(newVal, oldVal) {

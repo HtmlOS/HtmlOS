@@ -15,7 +15,7 @@
 
     <!-- loadding ani -->
     <q-inner-loading :showing="loading">
-      <q-spinner-hourglass size="32px" color="purple" />
+      <q-spinner-hourglass size="32px" color="primary" />
     </q-inner-loading>
   </div>
 </template>
@@ -38,6 +38,7 @@ export default {
   },
   methods: {
     load(blog) {
+      this.loading = true;
       if (blog === undefined) {
         this.content = "# Blog File Not Found";
         this.loading = false;
