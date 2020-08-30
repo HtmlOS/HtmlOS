@@ -1,7 +1,11 @@
 <template>
   <div class="fill-parent blog-page">
     <!-- http://www.quasarchs.com/vue-components/infinite-scroll 无线滚动 -->
-    <q-infinite-scroll @load="onLoad" :offset="250" :disable="offset >= total - 1">
+    <q-infinite-scroll
+      @load="onLoad"
+      :offset="250"
+      :disable="offset >= total - 1"
+    >
       <q-list padding class="rounded-borders text-primary">
         <q-item
           v-for="(item, index) in items"
@@ -43,9 +47,6 @@
 }
 .blog-page .blog-card .blog-card:hover {
   box-shadow: 0 8px 16px 0 rgba(90, 45, 8, 0.2);
-}
-.blog-page .blog-card .markdown-body {
-  overflow: hidden;
 }
 .blog-page .blog-card .markdown-body img {
   transition: all 0.6s;

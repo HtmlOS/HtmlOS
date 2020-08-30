@@ -6,7 +6,8 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
-
+import Config from "./plugins/config";
+Vue.use(Config);
 // 自定义组件全局注册
 import Widget from "./plugins/widget";
 Vue.use(Widget);

@@ -4,7 +4,7 @@
       <q-toolbar>
         <!-- http://www.quasarchs.com/style/visibility -->
         <!-- http://www.quasarchs.com/options/platform-detection -->
-        <div class="tool-bar-title">
+        <div class="blog-title cursor-pointer" @click="goHome">
           <strong>{{ $t("site.name") }}</strong>
         </div>
 
@@ -12,6 +12,7 @@
 
         <!-- search -->
         <q-select
+          v-if="$q.screen.width >= 320"
           ref="search"
           class="blog-search"
           color="white"
@@ -53,7 +54,11 @@
           </template>
 
           <template v-slot:option="scope">
-            <q-item v-bind="scope.itemProps" v-on="scope.itemEvents" @click="serchClick(scope.opt)">
+            <q-item
+              v-bind="scope.itemProps"
+              v-on="scope.itemEvents"
+              @click="serchClick(scope.opt)"
+            >
               <q-item-section side>
                 <q-icon name="collections_bookmark" style="margin: auto;" />
               </q-item-section>
@@ -98,10 +103,8 @@
 
     <q-page-container>
       <!-- ${require('@/assets/images/bg1.jpg') -->
-      <div class="fill-parent blog-root">
-        <div class="blog-container">
-          <router-view :key="$route.path" />
-        </div>
+      <div class="fill-parent">
+        <router-view :key="$route.path" />
       </div>
     </q-page-container>
 
@@ -118,8 +121,8 @@
   </q-layout>
 </template>
 
-<style lang="scss" scoped>
-.tool-bar-title {
+<style lang="scss">
+.blog-title {
   padding-left: 8px;
   padding-right: 8px;
   font-size: 18px;
@@ -127,22 +130,12 @@
 }
 
 .blog-search {
-  width: 32%;
-  min-width: 256px;
-  line-height: 24px;
+  width: 48%;
+  min-width: 144px;
+  max-width: 360px;
   margin: 2px;
-  overflow: hidden;
 }
 
-.blog-root {
-  overflow-y: auto;
-  position: relative;
-}
-.blog-container {
-  width: 100%;
-  min-height: 50%;
-  margin: 0 auto;
-}
 .blog-page {
   max-width: 768px;
   margin: 0 auto;
@@ -186,6 +179,13 @@ export default {
     };
   },
   methods: {
+    goHome() {
+      const path = `/blog/articles`;
+      if (this.$route.path === path) {
+        return;
+      }
+      this.$router.push(path);
+    },
     searchClear() {
       this.$refs.search.updateInputValue("", true);
       // input.value = "" ;
@@ -216,14 +216,13 @@ export default {
       });
     },
     serchClick(option) {
+      this.searchClear();
       const blog = option.blog;
       const path = `/blog/articles/${blog.name}`;
       if (this.$route.path === path) {
         return;
       }
-      this.$router.push({
-        path: path
-      });
+      this.$router.push(path);
     }
   },
   mounted() {

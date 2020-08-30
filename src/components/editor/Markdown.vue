@@ -4,7 +4,6 @@
 
 <style lang="scss">
 // 覆盖内部样式
-
 // 移除大标题的下边框
 .markdown-body h1,
 .markdown-body h2 {
@@ -81,28 +80,52 @@ export default {
       const container = this.$refs["markdown-it-container"];
       container.innerHTML = MD.render(this.content) || "";
     },
-    loadToc() {
-      this.$nextTick(() => {
-        const container = this.$refs["markdown-it-container"];
-        const tree = [];
-        for (const element of container.childNodes) {
-          if (element.nodeType !== 1) {
-            continue;
-          }
-          const nodeName = element.nodeName.toLowerCase();
-          if (/^h[1-6]{1}$/.test(nodeName) !== true) {
-            continue;
-          }
-          const h = parseInt(nodeName.substr(1), 10);
-          tree.push({
-            h: h,
-            top: element.getBoundingClientRect().top,
-            name: element.innerText
-          });
+    loadTocList(container) {
+      const list = [];
+      for (const element of container.childNodes) {
+        if (element.nodeType !== 1) {
+          continue;
         }
+        const nodeName = element.nodeName.toLowerCase();
+        if (/^h[1-6]{1}$/.test(nodeName) !== true) {
+          continue;
+        }
+        const h = parseInt(nodeName.substr(1), 10);
+        list.push({
+          h: h,
+          el: element
+        });
+      }
+      return list;
+    },
+    loadTocTree(list) {
+      const tree = [];
 
-        console.log(tree);
-      });
+      const insertNode = function(tree, node) {
+        const lastNode = tree[tree.length - 1];
+        if (lastNode && lastNode.h < node.h) {
+          const children = lastNode.children;
+          insertNode(children, node);
+        } else {
+          tree.push(node);
+        }
+      };
+
+      for (const node of list) {
+        node.children = [];
+        insertNode(tree, node);
+      }
+      return tree;
+    },
+    loadToc() {
+      setTimeout(() => {
+        this.$nextTick(() => {
+          const container = this.$refs["markdown-it-container"];
+          const tocList = this.loadTocList(container);
+          const tocTree = this.loadTocTree(tocList);
+          this.$emit("toc", tocList, tocTree);
+        });
+      }, 500);
     }
   },
   mounted() {

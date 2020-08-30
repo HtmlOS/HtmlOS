@@ -19,7 +19,7 @@ const megerList = function(l: Array<string>, r: Array<string>): Array<string> {
     if (item === undefined || item === null || item.length === 0) {
       continue;
     }
-    if(item === "blog"){
+    if (item === "blog") {
       continue;
     }
     if (temp.indexOf(item) < 0) {
@@ -134,16 +134,16 @@ class Blog {
     err: (e: any) => void
   ) {
     fetch(this.file)
-      .then((response) => {
+      .then(response => {
         return response.text();
       })
-      .then((content) => {
+      .then(content => {
         if (hook) {
           const src = this.parseContent(content);
           hook(src, this.fixUrl(src));
         }
       })
-      .catch((error) => err(error));
+      .catch(error => err(error));
   }
 
   fixUrl(content?: string, baseUrl?: string): string | undefined {
@@ -168,7 +168,7 @@ class BlogManager {
       }
       this.blogs.push(new Blog(blog));
     }
-    console.log(this.blogs);
+    console.log("blog.ts", this.blogs);
   }
 
   static findByName(name: string): Blog | undefined {
