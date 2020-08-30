@@ -117,12 +117,16 @@ export default {
       }
       return tree;
     },
-    loadToc() {
+    loadToc(retry = 0) {
       setTimeout(() => {
         this.$nextTick(() => {
           const container = this.$refs["markdown-it-container"];
           const tocList = this.loadTocList(container);
           const tocTree = this.loadTocTree(tocList);
+          if (tocList.length === 0 && retry > 0) {
+            this.loadToc(retry - 1);
+            return;
+          }
           this.$emit("toc", tocList, tocTree);
         });
       }, 500);
@@ -130,7 +134,7 @@ export default {
   },
   mounted() {
     this.load();
-    this.loadToc();
+    this.loadToc(2);
   },
   watch: {
     content: function(newVal, oldVal) {
