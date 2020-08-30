@@ -79,6 +79,7 @@ export default {
     load() {
       const container = this.$refs["markdown-it-container"];
       container.innerHTML = MD.render(this.content) || "";
+      this.loadToc(2);
     },
     loadTocList(container) {
       const list = [];
@@ -134,7 +135,6 @@ export default {
   },
   mounted() {
     this.load();
-    this.loadToc(2);
   },
   watch: {
     content: function(newVal, oldVal) {
