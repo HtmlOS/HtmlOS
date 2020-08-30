@@ -44,7 +44,7 @@
   bottom: 0px;
   width: 240px;
   background-color: whitesmoke;
-  overflow-y: auto;
+  overflow: auto;
 }
 </style>
 
@@ -71,6 +71,7 @@ export default {
     }
   },
   methods: {
+    // 加载博文正文
     load(blog) {
       this.loading = true;
       if (blog === undefined) {
@@ -89,41 +90,109 @@ export default {
         );
       }
     },
+    // 收到标题toc 更新事件
     onTocTitle(list, tree) {
-      console.log(list, tree);
-      const node = list[0];
-      node.id = "0";
-      node.label = node.el.innerText;
-      this.tocList.unshift(node);
-      this.tocTree.unshift(node);
+      this.onToc(list, tree, true);
     },
+    // 收到正文toc 更新事件
     onTocPage(list, tree) {
+      this.onToc(list, tree, false);
+    },
+    // 更新toc
+    onToc(list, tree, isTitle) {
       for (const i in list) {
         const node = list[i];
-        node.id = "" + (parseInt(i, 10) + 1);
+        node.id = (isTitle ? "0" : "1") + i;
         node.label = node.el.innerText;
-        this.tocList.push(node);
+        if (isTitle) {
+          this.tocList.unshift(node);
+        } else {
+          this.tocList.push(node);
+        }
       }
       for (const node of tree) {
-        this.tocTree.push(node);
+        if (isTitle) {
+          this.tocTree.unshift(node);
+        } else {
+          this.tocTree.push(node);
+        }
       }
     },
-    onTocClick(index) {
-      const el = this.tocList[index].el;
-      const top = el.getBoundingClientRect().top;
-      const scrollTop =
-        document.documentElement.scrollTop ||
-        window.pageYOffset ||
-        document.body.scrollTop;
-      window.scrollTo(0, top + scrollTop - 50);
+    // 当用户点击 toc 项时, 自动滚动到博文对应标题位置
+    onTocClick(id) {
+      for (const node of this.tocList) {
+        if (node.id === id) {
+          const el = node.el;
+          const top = el.getBoundingClientRect().top;
+          const scrollTop =
+            document.documentElement.scrollTop ||
+            window.pageYOffset ||
+            document.body.scrollTop;
+          window.scrollTo(0, top + scrollTop - 50);
+          return;
+        }
+      }
     },
-    scrolled(p) {
+    // 根据 toc list 序号 查找 toc el 元素
+    findTocEl(tocIndex) {
+      if (!this.$refs.toc) {
+        return;
+      }
+      const root = this.$refs.toc.childNodes[0];
+      const tocNodes = root.childNodes;
+
+      const pos = {
+        tar: tocIndex,
+        cur: 0
+      };
+      const findEl = function(pos, nodes) {
+        for (const node of nodes) {
+          if (pos.cur === pos.tar) {
+            return node;
+          }
+          pos.cur++;
+          if (node.className.indexOf("q-tree__node--parent") === -1) {
+            continue;
+          }
+          const child = node.childNodes[1].childNodes[0];
+          const children = child?.childNodes || [];
+          if (children.length > 0) {
+            const el = findEl(pos, children);
+            if (el) {
+              return el;
+            }
+          }
+        }
+      };
+      return findEl(pos, tocNodes);
+    },
+    // 滚动到toc list 序号滚动位置
+    scrollTocTo(tocIndex) {
+      const el = this.findTocEl(tocIndex);
+      if (!el) {
+        return;
+      }
+      const target = el.childNodes[0];
+      // const rect = target.getBoundingClientRect();
+      // const top = rect.top - 50;
+      // const bottom = rect.bottom - 50;
+      target.scrollIntoView();
+    },
+    // 当博文滚动时, 自动更新 toc 位置, 并自动滚动
+    scrolled(position) {
+      //当这个方法被调用时，意味着用户
+      //已将页面滚动到“position”
+      //
+      //“position”是一个Integer, 指定的以像素为单位的
+      //当前滚动位置。
       for (const i in this.tocList) {
-        const el = this.tocList[i].el;
+        const node = this.tocList[i];
+        const el = node.el;
         const bottom = el.getBoundingClientRect().bottom;
+        // 找到第一个可见的节点
         if (bottom >= 50) {
-          this.tocSelected = i;
-          // console.log(this.$refs.toc.childNodes[0]);
+          this.tocSelected = node.id;
+          this.scrollTocTo(parseInt(i, 10));
           return;
         }
       }
