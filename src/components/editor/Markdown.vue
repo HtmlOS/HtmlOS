@@ -72,7 +72,11 @@ export default {
   },
   data() {
     return {
-      html: ""
+      html: "",
+      toc: {
+        list: [],
+        tree: []
+      }
     };
   },
   methods: {
@@ -128,7 +132,11 @@ export default {
             this.loadToc(retry - 1);
             return;
           }
-          this.$emit("toc", tocList, tocTree);
+          if (this.toc.list.length === 0 && this.toc.tree.length === 0) {
+            this.toc.list = tocList;
+            this.toc.tree = tocTree;
+            this.$emit("toc", tocList, tocTree);
+          }
         });
       }, 500);
     }
