@@ -4,6 +4,11 @@ const spawn = require("cross-spawn");
 const pkg = require("./package.json");
 
 (function () {
+  console.error(
+    "目前采用 https://app.netlify.com/sites/gankcode/deploys 部署， 请不要使用 deploy.js"
+  );
+  process.exit(1);
+
   shell("yarn lint");
   shell("yarn build");
 
