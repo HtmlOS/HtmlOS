@@ -18,7 +18,7 @@ const processTitle = function (content) {
 
 const processAttributes = function (attr) {
   const split = attr.split("\n")[0].split(" ")[0].split(":");
-  const key = split?.[0].trim();
+  const key = split[0].trim();
   const value = attr.substr(key.length + 1).trim();
   return {
     key: key,
