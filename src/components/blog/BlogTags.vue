@@ -22,7 +22,7 @@
       "
     />
 
-    <q-chip v-if="blog.tags && blog.tags.length > 0" style="background:#0000">
+    <q-chip v-if="blog.tags && blog.tags.length > 0" style="background: #0000">
       <q-chip
         v-for="(tag, index) in blog.tags"
         :key="index"
@@ -46,7 +46,7 @@
 <script>
 export default {
   props: {
-    blog: Object
-  }
+    blog: Object,
+  },
 };
 </script>

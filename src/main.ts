@@ -6,8 +6,6 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
-import Config from "./plugins/config";
-Vue.use(Config);
 // 自定义组件全局注册
 import Widget from "./plugins/widget";
 Vue.use(Widget);
@@ -31,41 +29,41 @@ Vue.use(VueI18n);
 const i18n = new VueI18n({
   fallbackLocale: "en",
   locale: Intl.locale,
-  messages: Intl.messages
+  messages: Intl.messages,
 });
 
 // 右键菜单
 import ContextMenu from "@htmlos/contextmenu";
 import "@htmlos/contextmenu/dist/contextmenu.css";
 Vue.use({
-  install: Vue => {
+  install: (Vue) => {
     Vue.prototype.$menu = ContextMenu;
-  }
+  },
 });
 
 new Vue({
   router,
   i18n,
   store,
-  render: h => h(App),
+  render: (h) => h(App),
 
-  created: function() {
+  created: function () {
     // this.$os.bind(this);
     this.$intl.bind(this);
     ContextMenu.config({
       i18n: (s): string => {
         return this.$t(s).toString();
-      }
+      },
     });
     document.title = this.$t("site.name").toString();
   },
 
   watch: {
-    "i18n.locale": function() {
+    "i18n.locale": function () {
       document.title =
         this.$route.meta.title ||
         this.$route.meta.pathName ||
         this.$t("site.name");
-    }
-  }
+    },
+  },
 }).$mount("#app");

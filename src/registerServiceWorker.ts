@@ -31,11 +31,11 @@ if (process.env.NODE_ENV === "production") {
     },
     error(error) {
       console.error("Error during service worker registration:", error);
-    }
+    },
   });
 }
 
-const fireKeyEvent = function(el: any = window, evtType: any, keyCode: any) {
+const fireKeyEvent = function (el: any = window, evtType: any, keyCode: any) {
   const doc = el.ownerDocument || document;
   const win = doc.defaultView || doc.parentWindow;
   let evtObj;
@@ -57,14 +57,14 @@ const fireKeyEvent = function(el: any = window, evtType: any, keyCode: any) {
     } else {
       evtObj = doc.createEvent("UIEvents");
       Object.defineProperty(evtObj, "keyCode", {
-        get: function() {
+        get: function () {
           return this.keyCodeVal;
-        }
+        },
       });
       Object.defineProperty(evtObj, "which", {
-        get: function() {
+        get: function () {
           return this.keyCodeVal;
-        }
+        },
       });
       evtObj.initUIEvent(evtType, true, true, win, 1);
       evtObj.keyCodeVal = keyCode;

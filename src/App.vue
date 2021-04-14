@@ -12,7 +12,7 @@ import Reloader from "./components/Reloader";
 
 export default {
   components: {
-    Reloader
+    Reloader,
   },
   data() {
     return {};
@@ -27,11 +27,11 @@ export default {
           document.body.removeChild(loading);
         });
       }
-    }
+    },
   },
   mounted() {
     // 加载完毕, 移除 /public/index.html 中的加载动画
     this.removeLoading();
-  }
+  },
 };
 </script>

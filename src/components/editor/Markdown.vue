@@ -62,21 +62,21 @@ const MD = new MarkdownIt({
       }
     }
     return `<pre class="${cls}"><code>${html || str}</code></pre>`;
-  }
+  },
 }).use(MarkdownItEmoji);
 
 export default {
   name: "Markdown",
   props: {
-    content: String
+    content: String,
   },
   data() {
     return {
       html: "",
       toc: {
         list: [],
-        tree: []
-      }
+        tree: [],
+      },
     };
   },
   methods: {
@@ -98,7 +98,7 @@ export default {
         const h = parseInt(nodeName.substr(1), 10);
         list.push({
           h: h,
-          el: element
+          el: element,
         });
       }
       return list;
@@ -106,7 +106,7 @@ export default {
     loadTocTree(list) {
       const tree = [];
 
-      const insertNode = function(tree, node) {
+      const insertNode = function (tree, node) {
         const lastNode = tree[tree.length - 1];
         if (lastNode && lastNode.h < node.h) {
           const children = lastNode.children;
@@ -139,15 +139,15 @@ export default {
           }
         });
       }, 500);
-    }
+    },
   },
   mounted() {
     this.load();
   },
   watch: {
-    content: function(newVal, oldVal) {
+    content: function (newVal, oldVal) {
       this.load();
-    }
-  }
+    },
+  },
 };
 </script>

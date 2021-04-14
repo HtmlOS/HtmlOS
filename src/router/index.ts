@@ -12,55 +12,55 @@ const routes: Array<RouteConfig> = [
       {
         path: "article",
         name: "BlogArticleEmpty",
-        component: () => import("@/views/blog/BlogArticle.vue")
+        component: () => import("@/views/blog/BlogArticle.vue"),
       },
       {
         path: "articles/*",
         name: "BlogArticle",
-        component: () => import("@/views/blog/BlogArticle.vue")
+        component: () => import("@/views/blog/BlogArticle.vue"),
       },
       {
         path: "articles",
         name: "BlogArticles",
-        component: () => import("@/views/blog/BlogArticles.vue")
+        component: () => import("@/views/blog/BlogArticles.vue"),
       },
       {
         path: "archive",
         name: "BlogArchive",
-        component: () => import("@/views/blog/BlogArchive.vue")
+        component: () => import("@/views/blog/BlogArchive.vue"),
       },
       {
         path: "projects",
         name: "BlogProjects",
-        component: () => import("@/views/blog/BlogProjects.vue")
+        component: () => import("@/views/blog/BlogProjects.vue"),
       },
       {
         path: "about",
         name: "BlogAbout",
-        component: () => import("@/views/blog/BlogAbout.vue")
-      }
+        component: () => import("@/views/blog/BlogAbout.vue"),
+      },
     ],
-    redirect: "/blog/articles"
+    redirect: "/blog/articles",
   },
   {
     path: "/desktop",
     name: "Desktop",
-    component: () => import("@/views/desktop/Desktop.vue")
+    component: () => import("@/views/desktop/Desktop.vue"),
   },
   {
     path: "/",
-    redirect: "/blog"
+    redirect: "/blog",
   },
   {
     path: "*",
-    redirect: "/"
-  }
+    redirect: "/",
+  },
 ];
 
 const router = new VueRouter({
   mode: "hash",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;

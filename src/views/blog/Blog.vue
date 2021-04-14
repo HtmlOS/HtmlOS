@@ -36,8 +36,8 @@
             <q-icon
               v-if="
                 search.text !== undefined &&
-                  search.text !== null &&
-                  search.text !== ''
+                search.text !== null &&
+                search.text !== ''
               "
               class="cursor-pointer"
               name="clear"
@@ -60,7 +60,7 @@
               @click="serchClick(scope.opt)"
             >
               <q-item-section side>
-                <q-icon name="collections_bookmark" style="margin: auto;" />
+                <q-icon name="collections_bookmark" style="margin: auto" />
               </q-item-section>
               <q-item-section>
                 <markdown :content="scope.opt.label" />
@@ -82,7 +82,7 @@
         </q-tabs>
         <q-btn dense flat round icon="menu" v-if="!$q.screen.gt.xs">
           <q-menu>
-            <q-list style="min-width: 144px;">
+            <q-list style="min-width: 144px">
               <q-item
                 clickable
                 v-for="(page, index) in pages"
@@ -146,7 +146,7 @@
 <script>
 import { LoveHeart } from "@/plugins/loveheart";
 
-import { BlogManager } from "@/plugins/blog";
+import { Blog } from "@/plugins/blog";
 
 export default {
   data() {
@@ -155,27 +155,27 @@ export default {
       pages: [
         {
           name: "blog.nav.articles",
-          route: "/blog/articles"
+          route: "/blog/articles",
         },
         {
           name: "blog.nav.archive",
-          route: "/blog/archive"
+          route: "/blog/archive",
         },
         {
           name: "blog.nav.projects",
-          route: "/blog/projects"
+          route: "/blog/projects",
         },
         {
           name: "blog.nav.about",
-          route: "/blog/about"
-        }
+          route: "/blog/about",
+        },
       ],
       search: {
         text: "",
         model: null,
         filtering: false,
-        options: []
-      }
+        options: [],
+      },
     };
   },
   methods: {
@@ -202,11 +202,11 @@ export default {
       }
       this.search.filtering = true;
       const titles = [];
-      for (const blog of BlogManager.blogs) {
+      for (const blog of Blog.blogs) {
         if (blog.title.toLowerCase().indexOf(val.toLowerCase().trim()) !== -1) {
           titles.push({
             blog: blog,
-            label: blog.title
+            label: blog.title,
           });
         }
       }
@@ -223,13 +223,13 @@ export default {
         return;
       }
       this.$router.push(path);
-    }
+    },
   },
   mounted() {
     LoveHeart.attach();
   },
   destroyed() {
     LoveHeart.detach();
-  }
+  },
 };
 </script>

@@ -25,12 +25,12 @@ export default {
     Statusbar,
     Taskbar,
     Background,
-    Workspace
+    Workspace,
   },
   data() {
     return {};
   },
   mounted() {},
-  destroyed() {}
+  destroyed() {},
 };
 </script>

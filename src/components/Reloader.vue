@@ -2,16 +2,12 @@
   <div class="sw_dialog_updated" v-if="sw.updated">
     <h3>{{ $t("sw.updated") }}</h3>
 
-    <div style="display: flex;">
-      <el-button type="primary" @click="refresh">
-        $t("sw.reload")
-      </el-button>
+    <div style="display: flex">
+      <el-button type="primary" @click="refresh"> $t("sw.reload") </el-button>
 
-      <div style="min-width: 16px;"></div>
+      <div style="min-width: 16px"></div>
 
-      <el-button @click="sw.updated = false">
-        $t("sw.later")
-      </el-button>
+      <el-button @click="sw.updated = false"> $t("sw.later") </el-button>
     </div>
   </div>
 </template>
@@ -36,8 +32,8 @@ export default {
   data() {
     return {
       sw: {
-        updated: false
-      }
+        updated: false,
+      },
     };
   },
   methods: {
@@ -46,13 +42,13 @@ export default {
     },
     onSwRefresh() {
       this.sw.updated = true;
-    }
+    },
   },
   mounted() {
     window.addEventListener("sw.updated", this.onSwRefresh, true);
   },
   destroyed() {
     window.removeEventListener("sw.updated", this.onSwRefresh);
-  }
+  },
 };
 </script>

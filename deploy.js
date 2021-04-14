@@ -3,7 +3,7 @@ const path = require("path");
 const spawn = require("cross-spawn");
 const pkg = require("./package.json");
 
-(function() {
+(function () {
   shell("yarn lint");
   shell("yarn build");
 
@@ -12,14 +12,14 @@ const pkg = require("./package.json");
       name: "gankcode",
       mail: "zlhc@live.com",
       publish: "https://gitee.com/htmlos/htmlos.git",
-      website: `https://htmlos.gitee.io`
+      website: `https://htmlos.gitee.io`,
     },
     github: {
       name: "robotism",
       mail: "zlhc@live.com",
       publish: "https://github.com/HtmlOS/htmlos.github.io.git",
-      website: `https://htmlos.github.io`
-    }
+      website: `https://htmlos.github.io`,
+    },
   };
   const user = users["github"];
   const remote = shell("git remote -v", process.cwd(), "pipe");
@@ -38,7 +38,7 @@ const pkg = require("./package.json");
       `> Sources publish @ [${repo}](${repo})<br/>`,
       ``,
       `> Website publish @ [${user.website}](${user.website})`,
-      ``
+      ``,
     ].join("\n")
   );
   writeFile(path.resolve(process.cwd(), "./dist/CNAME"), "gankcode.com");
@@ -51,10 +51,10 @@ const pkg = require("./package.json");
     `git add .`,
     `git commit -m 'deploy'`,
     `git remote add origin ${user.publish}`,
-    `git push -u origin master --force`
+    `git push -u origin master --force`,
   ];
 
-  commands.forEach(function(cmd) {
+  commands.forEach(function (cmd) {
     shell(cmd, path.resolve(process.cwd(), "./dist"));
   });
 })();
@@ -69,7 +69,7 @@ function shell(command, directory, stdio) {
       cwd: directory || process.cwd(),
       env: process.env,
       stdio: stdio || "inherit",
-      encoding: "utf-8"
+      encoding: "utf-8",
     });
     if (result.status !== 0) {
       process.exit(result.status);

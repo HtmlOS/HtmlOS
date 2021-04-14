@@ -31,7 +31,7 @@ class IntlCache {
   private loadMessages() {
     // 遍历当前目录下(包含子目录)所有语言翻译文件
     const files = require.context("../i18n/", true, /\.\/.+\/.+\.json$/);
-    files.keys().forEach(key => {
+    files.keys().forEach((key) => {
       // 加载
       const path = key.substr(2);
       const lang = require("../i18n/" + path);

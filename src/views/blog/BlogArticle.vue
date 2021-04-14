@@ -17,7 +17,11 @@
     <!-- content -->
     <div :style="`margin-left: ${isTocShow ? 240 : 0}px`">
       <div class="fill-parent blog-page" v-scroll="scrolled">
-        <markdown :content="`# ${blog.title}`" @toc="onTocTitle" v-if="blog !== undefined" />
+        <markdown
+          :content="`# ${blog.title}`"
+          @toc="onTocTitle"
+          v-if="blog !== undefined"
+        />
 
         <blog-tags :blog="blog" v-if="blog !== undefined"></blog-tags>
 
@@ -62,13 +66,13 @@ export default {
       content: "",
       tocList: [],
       tocTree: [],
-      tocSelected: "0"
+      tocSelected: "0",
     };
   },
   computed: {
     isTocShow() {
       return this.tocTree.length > 0 && this.$q.screen.width > 1080;
-    }
+    },
   },
   methods: {
     // 加载博文正文
@@ -83,7 +87,7 @@ export default {
             this.content = md;
             this.loading = false;
           },
-          e => {
+          (e) => {
             this.content = "# Blog File Load Failed";
             this.loading = false;
           }
@@ -143,9 +147,9 @@ export default {
 
       const pos = {
         tar: tocIndex,
-        cur: 0
+        cur: 0,
       };
-      const findEl = function(pos, nodes) {
+      const findEl = function (pos, nodes) {
         for (const node of nodes) {
           if (pos.cur === pos.tar) {
             return node;
@@ -196,12 +200,12 @@ export default {
           return;
         }
       }
-    }
+    },
   },
   mounted() {
     const href = window.location.href;
     const name = href.substr(href.lastIndexOf("/") + 1);
     this.load((this.blog = BlogManager.findByName(name)));
-  }
+  },
 };
 </script>

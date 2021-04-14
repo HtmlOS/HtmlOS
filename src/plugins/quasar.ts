@@ -15,15 +15,15 @@ Vue.use(Quasar, {
     loadingBar: {
       color: "orange",
       size: "3px",
-      position: "top"
-    }
+      position: "top",
+    },
   },
   components: {
     /* not needed if importStrategy is not 'manual' */
   },
   directives: {
     /* not needed if importStrategy is not 'manual' */
-  }
+  },
 });
 
 class QuasarV {
@@ -40,7 +40,7 @@ class QuasarV {
   static setLanguage(lang: string) {
     const l = this.findLanguage(lang);
     if (l) {
-      import(`quasar/lang/${l}`).then(lang => {
+      import(`quasar/lang/${l}`).then((lang) => {
         Quasar.lang.set(lang.default);
       });
     } else {
@@ -51,7 +51,7 @@ class QuasarV {
 
 // 动态检索 Quasar 支持的语言名称
 const files = require.context("quasar/lang/", true, /.+\.js$/);
-files.keys().forEach(key => {
+files.keys().forEach((key) => {
   // 加载
   const path = key.substr(2);
   const name = path.substr(0, path.indexOf("."));

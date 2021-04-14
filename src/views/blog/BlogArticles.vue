@@ -13,7 +13,7 @@
           v-ripple
           clickable
           class="blog-card"
-          @click="openblog(item)"
+          @click="openBlog(item)"
         >
           <div class="fill-parent">
             <markdown class :content="`# ${item.title}`" />
@@ -22,7 +22,7 @@
 
             <q-separator inset style="margin-bottom: 24px" />
 
-            <markdown class :content="item.fixUrl(item.excerpt)" />
+            <markdown class :content="item.fixed(item.excerpt)" />
           </div>
         </q-item>
       </q-list>
@@ -69,14 +69,14 @@ export default {
       total: 0,
       offset: 0,
       limit: 10,
-      items: []
+      items: [],
     };
   },
   methods: {
-    openblog(blog) {
+    openBlog(blog) {
       setTimeout(() => {
         this.$router.push({
-          path: `/blog/articles/${blog.name}`
+          path: `/blog/articles/${blog.name}`,
         });
       }, 300);
     },
@@ -86,6 +86,7 @@ export default {
       }
       const next = Math.min(this.total - this.offset, this.limit);
       const pages = this.blogs.slice(this.offset, next);
+
       for (const page of pages) {
         this.items.push(page);
       }
@@ -96,13 +97,13 @@ export default {
         this.loadMore();
         done();
       }, 1000);
-    }
+    },
   },
   mounted() {
     this.blogs = BlogManager.blogs;
     this.total = BlogManager.blogs.length;
     this.loadMore();
   },
-  destroyed() {}
+  destroyed() {},
 };
 </script>

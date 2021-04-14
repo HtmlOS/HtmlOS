@@ -4,7 +4,7 @@ const heartCssName = "_love_heart_";
 const heartClassName = heartCssName;
 
 export const LoveHeart = {
-  addHeart: function(event: any, anchor = document.body) {
+  addHeart: function (event: any, anchor = document.body) {
     const divHeart: any = document.createElement("div");
     divHeart.className = heartClassName;
     divHeart.infos = {
@@ -12,7 +12,7 @@ export const LoveHeart = {
       y: event.clientY - 5,
       scale: 1,
       alpha: 1,
-      color: randomColor()
+      color: randomColor(),
     };
     // document.addEventListener("contextmenu", function(event) {
     //   const e = event || window.event;
@@ -36,16 +36,16 @@ export const LoveHeart = {
       );
     }
   },
-  attach: function() {
+  attach: function () {
     const win: any = window;
-    win.requestAnimationFrame = (function() {
+    win.requestAnimationFrame = (function () {
       return (
         win.requestAnimationFrame ||
         win.webkitRequestAnimationFrame ||
         win.mozRequestAnimationFrame ||
         win.oRequestAnimationFrame ||
         win.msRequestAnimationFrame ||
-        function(callback: any) {
+        function (callback: any) {
           setTimeout(callback, 1000 / 60);
         }
       );
@@ -136,12 +136,12 @@ export const LoveHeart = {
       document.getElementsByTagName("head")[0].appendChild(style);
     }
   },
-  detach: function() {
+  detach: function () {
     document.body.removeEventListener("click", this.addHeart);
     const hearts = document.getElementsByClassName(heartClassName);
     for (let i = 0; i < hearts.length; i++) {
       const element = hearts[i];
       document.body.removeChild(element);
     }
-  }
+  },
 };
