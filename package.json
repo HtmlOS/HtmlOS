@@ -5,7 +5,7 @@
   "scripts": {
     "ncu": "ncu -u && npx browserslist@latest --update-db",
     "serve": "vue-cli-service serve --fix",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build && node build.hook.js",
     "lint": "vue-cli-service lint",
     "deploy": "node deploy.js "
   },
