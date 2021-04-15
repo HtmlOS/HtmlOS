@@ -108,9 +108,18 @@ class Blog {
     this.cover = envBlogObj.cover;
     this.excerpt = envBlogObj.excerpt;
     this.categories = (envBlogObj.categories || "").split(",");
-    this.tags = (envBlogObj.tags || "") + "," + (this.path || "");
-    this.tags = this.tags.replace(/[,/]+/g, ",").split(",");
-
+    this.tags = (this.path || "")
+      .replace(/^\s*\/articles\/blog\//, "")
+      .replace(/\//g, ",");
+    this.tags = (this.tags + "," + (envBlogObj.tags || "")).replace(
+      /,\s*,/g,
+      ","
+    );
+    this.tags = this.tags
+      .replace(/^\s*,/, "")
+      .replace(/,\s*$/, "")
+      .replace(/[,/]+/g, ",")
+      .split(",");
     if (!processCover(this.excerpt) && this.cover) {
       const fixedCover = "![" + this.cover.alt + "](" + this.cover.url + ")\n";
       this.excerpt = fixedCover + this.excerpt;

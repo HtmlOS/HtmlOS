@@ -146,7 +146,7 @@
 <script>
 import { LoveHeart } from "@/plugins/loveheart";
 
-import { Blog } from "@/plugins/blog";
+import { BlogManager } from "@/plugins/blog";
 
 export default {
   data() {
@@ -202,7 +202,7 @@ export default {
       }
       this.search.filtering = true;
       const titles = [];
-      for (const blog of Blog.blogs) {
+      for (const blog of BlogManager.blogs) {
         if (blog.title.toLowerCase().indexOf(val.toLowerCase().trim()) !== -1) {
           titles.push({
             blog: blog,

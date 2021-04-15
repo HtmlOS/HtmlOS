@@ -43,7 +43,10 @@ const MD = new MarkdownIt({
     if (lang) {
       if (hljs.getLanguage(lang)) {
         try {
-          const result = hljs.highlight(lang, str);
+          const result = hljs.highlight(str, {
+            language: lang,
+            ignoreIllegals: true,
+          });
           html = result.value;
         } catch (__) {
           if (__) {
@@ -86,13 +89,16 @@ export default {
       this.loadToc(2);
     },
     loadTocList(container) {
+      if (!container) {
+        return [];
+      }
       const list = [];
       for (const element of container.childNodes) {
         if (element.nodeType !== 1) {
           continue;
         }
         const nodeName = element.nodeName.toLowerCase();
-        if (/^h[1-6]{1}$/.test(nodeName) !== true) {
+        if (/^h[1-6]$/.test(nodeName) !== true) {
           continue;
         }
         const h = parseInt(nodeName.substr(1), 10);
@@ -104,6 +110,9 @@ export default {
       return list;
     },
     loadTocTree(list) {
+      if (!list) {
+        return [];
+      }
       const tree = [];
 
       const insertNode = function (tree, node) {

@@ -28,6 +28,9 @@ const load = function (dir) {
     if (stat.size <= 0) {
       return;
     }
+    if (filePath.indexOf("/.") !== -1) {
+      return;
+    }
     if (fileFullName.toUpperCase() === "README.MD") {
       return;
     }
@@ -55,5 +58,5 @@ const load = function (dir) {
 };
 
 exports.default = {
-  blogs: load("public/blog"),
+  blogs: load("public/blog/articles"),
 };
