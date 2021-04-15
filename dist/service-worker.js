@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.1ae6519b5d6b02085b259d2fa14a3c7a.js"
+  "precache-manifest.0996e4deceacfeb3f1e4d97b43b49b35.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "gankcode"});
