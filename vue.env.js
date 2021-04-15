@@ -50,7 +50,7 @@ const load = function (dir) {
     delete blog.content;
     blogs.push(blog);
   });
-  console.log(JSON.stringify(blogs, null, 2));
+  // console.log(JSON.stringify(blogs, null, 2));
   return blogs;
 };
 

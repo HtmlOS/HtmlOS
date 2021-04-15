@@ -17,6 +17,9 @@ const processTitle = function (content) {
 };
 
 const processAttributes = function (attr) {
+  if (!attr) {
+    return {};
+  }
   const split = attr.split("\n")[0].split(" ")[0].split(":");
   const key = split[0].trim();
   const value = attr.substr(key.length + 1).trim();
@@ -27,9 +30,12 @@ const processAttributes = function (attr) {
 };
 
 const processCover = function (content) {
+  if (!content) {
+    return undefined;
+  }
   const regexComment = new RegExp(REGEX_MD_COMMENT, "gm");
   const regexImage = new RegExp(REGEX_MD_IMAGE, "gm");
-  content = content?.toString()?.replace(regexComment, "");
+  content = content.replace(regexComment, "");
   if (regexImage.test(content)) {
     const alt = RegExp.$1;
     const url = RegExp.$2;
@@ -42,7 +48,9 @@ const processCover = function (content) {
 const processExcerpt = function (attrs) {
   const regexComment = new RegExp(REGEX_MD_COMMENT, "gm");
   let excerpt = attrs["more"];
-  excerpt = excerpt?.replace(regexComment, "");
+  if (excerpt) {
+    excerpt = excerpt.replace(regexComment, "");
+  }
   // remove unused prop 'more'
   delete attrs["more"];
   return excerpt;
@@ -56,20 +64,20 @@ class Markdown {
       const match = RegExp.lastMatch;
       const pos = regexComment.lastIndex;
       const attr = processAttributes(RegExp.$1.trim());
-      switch (attr?.key) {
+      switch (attr.key) {
         case "more":
           attr.value = content.substr(0, pos);
           break;
         case "iframe":
           content =
             content.substr(0, pos - match.length) +
-            attr?.value +
+            attr.value +
             content.substr(pos);
           break;
         default:
           break;
       }
-      attrs[attr?.key] = attr?.value;
+      attrs[attr.key] = attr.value;
     }
     this.content = content;
     this.title = processTitle(content);
@@ -90,18 +98,18 @@ class Blog {
     if (!envBlogObj) {
       return;
     }
-    this.file = envBlogObj?.file;
-    this.path = envBlogObj?.file.substr(0, envBlogObj.file.lastIndexOf("/"));
-    this.name = envBlogObj?.file.substr(envBlogObj.file.lastIndexOf("/") + 1);
-    this.size = envBlogObj?.size;
-    this.title = envBlogObj?.title;
+    this.file = envBlogObj.file;
+    this.path = envBlogObj.file.substr(0, envBlogObj.file.lastIndexOf("/"));
+    this.name = envBlogObj.file.substr(envBlogObj.file.lastIndexOf("/") + 1);
+    this.size = envBlogObj.size;
+    this.title = envBlogObj.title;
     this.created = new Date(envBlogObj.created);
     this.updated = new Date(envBlogObj.updated);
-    this.cover = envBlogObj?.cover;
-    this.excerpt = envBlogObj?.excerpt;
-    this.categories = envBlogObj?.categories?.split(",");
+    this.cover = envBlogObj.cover;
+    this.excerpt = envBlogObj.excerpt;
+    this.categories = envBlogObj.categories?.split(",");
     this.tags = new Set(
-      envBlogObj?.tags?.split(",").concat(this.path.split("/"))
+      envBlogObj.tags?.split(",").concat(this.path.split("/"))
     ).values();
 
     if (!processCover(this.excerpt) && this.cover) {
@@ -128,21 +136,24 @@ class Blog {
   }
 
   fixed(content) {
+    if (!content) {
+      return "";
+    }
     // 去除所有注释
     const regexComment = new RegExp(REGEX_MD_COMMENT, "gm");
-    content = content?.toString()?.replace(regexComment, "");
+    content = content.replace(regexComment, "");
 
     // 去除重复大标题
-    if (this.title?.trim() === processTitle(content)?.trim()) {
+    if (this.title === processTitle(content)) {
       const regex = new RegExp(REGEX_MD_TITLE, "m");
-      content = content?.replace(regex, "");
+      content = content.replace(regex, "");
     }
     // 当前md文件所在路径
     const path = (this.path + "/").replace(/\/\//gim, "/");
 
     // 替换超链接地址
     const regex = new RegExp(REGEX_MD_RELATIVE_LINK, "gim");
-    return content?.replace(regex, "[$1](" + path + "$2)") ?? "";
+    return content.replace(regex, "[$1](" + path + "$2)");
   }
 }
 
@@ -151,11 +162,13 @@ class BlogManager {
 
   static load() {
     const blogs = [];
-    AppEnv?.blogs?.sort((a, b) => {
-      return new Date(b.created).getTime() - new Date(a.created).getTime();
-    });
-    for (const item of AppEnv?.blogs ?? []) {
-      blogs.push(new Blog(item));
+    if (AppEnv.blogs) {
+      AppEnv.blogs.sort((a, b) => {
+        return new Date(b.created).getTime() - new Date(a.created).getTime();
+      });
+      for (const item of AppEnv.blogs ?? []) {
+        blogs.push(new Blog(item));
+      }
     }
     return blogs;
   }
