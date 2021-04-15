@@ -49,7 +49,7 @@ const processExcerpt = function (attrs) {
   const regexComment = new RegExp(REGEX_MD_COMMENT, "gm");
   let excerpt = attrs["more"];
   if (excerpt) {
-    excerpt = excerpt.replace(regexComment, "");
+    excerpt = excerpt.replace(regexComment, "").replace(/\n+/gm, "\n").trim();
   }
   // remove unused prop 'more'
   delete attrs["more"];
@@ -107,9 +107,12 @@ class Blog {
     this.updated = new Date(envBlogObj.updated);
     this.cover = envBlogObj.cover;
     this.excerpt = envBlogObj.excerpt;
+
     this.categories = (envBlogObj.categories || "").split(",");
+
+    // tags = path tags + comment tags
     this.tags = (this.path || "")
-      .replace(/^\s*\/articles\/blog\//, "")
+      .replace(new RegExp(envBlogObj.__basedir), "")
       .replace(/\//g, ",");
     this.tags = (this.tags + "," + (envBlogObj.tags || "")).replace(
       /,\s*,/g,
@@ -120,6 +123,13 @@ class Blog {
       .replace(/,\s*$/, "")
       .replace(/[,/]+/g, ",")
       .split(",");
+    try {
+      this.tags = Array.from(new Set(this.tags));
+    } catch (e) {
+      console.log(e);
+    }
+
+    // fix excerpt
     if (!processCover(this.excerpt) && this.cover) {
       const fixedCover = "![" + this.cover.alt + "](" + this.cover.url + ")\n";
       this.excerpt = fixedCover + this.excerpt;
