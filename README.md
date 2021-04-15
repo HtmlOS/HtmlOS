@@ -4,10 +4,7 @@
 
 `本站正在建设中, 敬请期待...`
 
-### WebSite publish@ 
-  - https://gankcode.com
-  - https://htmlos.github.io/Htmlos
-  - https://gankcode.netlify.app
+## WebSite **https://gankcode.com**
 
 
 ## Features
@@ -25,14 +22,20 @@
         - [ ] Rust
         - [ ] Go
         - [ ] ...
-    - [ ] Linux
     - [ ] Database
         - [ ] MySQL
         - [ ] TiDB
-    - [ ] SpringCloud
-    - [ ] Android
-    - [ ] Docker
-    - [ ] K8s/Rancher
+        - [ ] Redis
+    - [ ] Platform
+        - [ ] Windows
+        - [ ] Linux
+        - [ ] Darwin
+        - [ ] Android
+        - [ ] IOS
+    - [ ] FrameWork
+    - [ ] DevOps
+        - [ ] Docker
+        - [ ] K8s/Rancher
     
 - HtmlOS
     - Plugins
