@@ -159,7 +159,7 @@ export default {
             continue;
           }
           const child = node.childNodes[1].childNodes[0];
-          const children = child?.childNodes || [];
+          const children = child.childNodes || [];
           if (children.length > 0) {
             const el = findEl(pos, children);
             if (el) {
