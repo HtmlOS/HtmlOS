@@ -49,7 +49,10 @@ const processExcerpt = function (attrs) {
   const regexComment = new RegExp(REGEX_MD_COMMENT, "gm");
   let excerpt = attrs["more"];
   if (excerpt) {
-    excerpt = excerpt.replace(regexComment, "").replace(/\n+/gm, "\n").trim();
+    excerpt = excerpt
+      .replace(regexComment, "")
+      .replace(/\n\n+/gm, "\n\n")
+      .trim();
   }
   // remove unused prop 'more'
   delete attrs["more"];
