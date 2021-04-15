@@ -107,14 +107,12 @@ class Blog {
     this.updated = new Date(envBlogObj.updated);
     this.cover = envBlogObj.cover;
     this.excerpt = envBlogObj.excerpt;
-    this.categories = envBlogObj.categories?.split(",");
-    this.tags = new Set(
-      envBlogObj.tags?.split(",").concat(this.path.split("/"))
-    ).values();
+    this.categories = (envBlogObj.categories || "").split(",");
+    this.tags = (envBlogObj.tags || "") + "," + (this.path || "");
+    this.tags = this.tags.replace(/[,/]+/g, ",").split(",");
 
     if (!processCover(this.excerpt) && this.cover) {
-      const fixedCover =
-        "![" + this.cover?.alt + "](" + this.cover?.url + ")\n";
+      const fixedCover = "![" + this.cover.alt + "](" + this.cover.url + ")\n";
       this.excerpt = fixedCover + this.excerpt;
     }
   }
@@ -166,7 +164,7 @@ class BlogManager {
       AppEnv.blogs.sort((a, b) => {
         return new Date(b.created).getTime() - new Date(a.created).getTime();
       });
-      for (const item of AppEnv.blogs ?? []) {
+      for (const item of AppEnv.blogs) {
         blogs.push(new Blog(item));
       }
     }
