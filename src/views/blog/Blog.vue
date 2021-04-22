@@ -121,7 +121,7 @@
   </q-layout>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .blog-title {
   padding-left: 8px;
   padding-right: 8px;
@@ -151,7 +151,6 @@ import { BlogManager } from "@/plugins/blog";
 export default {
   data() {
     return {
-      bg: require("@/assets/images/bg1.jpg"),
       pages: [
         {
           name: "blog.nav.articles",

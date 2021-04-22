@@ -4,7 +4,7 @@
     <q-infinite-scroll
       @load="onLoad"
       :offset="250"
-      :disable="offset >= total - 1"
+      :disable="this.items.length >= total"
     >
       <q-list padding class="rounded-borders text-primary">
         <q-item
@@ -45,12 +45,15 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px 0 rgba(109, 62, 24, 0.2);
 }
+
 .blog-page .blog-card .blog-card:hover {
   box-shadow: 0 8px 16px 0 rgba(90, 45, 8, 0.2);
 }
+
 .blog-page .blog-card .markdown-body img {
   transition: all 0.6s;
 }
+
 .blog-page .blog-card .markdown-body img:hover {
   transform: scale(1.025);
 }
@@ -67,7 +70,6 @@ export default {
     return {
       blogs: [],
       total: 0,
-      offset: 0,
       limit: 10,
       items: [],
     };
@@ -81,16 +83,18 @@ export default {
       }, 300);
     },
     loadMore() {
-      if (this.offset >= this.total - 1) {
+      const offset = this.items.length;
+      const remain = this.total - offset;
+      if (remain < 0) {
         return;
       }
-      const next = Math.min(this.total - this.offset, this.limit);
-      const pages = this.blogs.slice(this.offset, next);
+      const next = Math.min(remain, this.limit);
+      const pages = this.blogs.slice(offset, offset + next);
 
+      console.log("load more", pages);
       for (const page of pages) {
         this.items.push(page);
       }
-      this.offset = this.offset + next;
     },
     onLoad(index, done) {
       setTimeout(() => {
@@ -102,7 +106,6 @@ export default {
   mounted() {
     this.blogs = BlogManager.blogs;
     this.total = BlogManager.blogs.length;
-    this.loadMore();
   },
   destroyed() {},
 };

@@ -194,6 +194,10 @@ class BlogManager {
   }
 
   static findByName(name) {
+    if (!name) {
+      return undefined;
+    }
+    name = decodeURI(name);
     for (const blog of BlogManager.blogs) {
       if (blog.name === name) {
         return blog;

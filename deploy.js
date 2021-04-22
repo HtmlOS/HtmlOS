@@ -28,7 +28,7 @@ const pkg = require("./package.json");
   };
   const user = users["github"];
   const remote = shell("git remote -v", process.cwd(), "pipe");
-  const regex = /(http.{1}:\/\/.*\.git)/;
+  const regex = /(http[s]?:\/\/.*\.git)/;
   const repo = remote.join("\n").match(regex)[0];
 
   deleteFile(path.resolve(process.cwd(), "./dist/blog/.git"));

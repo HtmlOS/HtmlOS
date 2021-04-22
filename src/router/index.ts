@@ -43,13 +43,38 @@ const routes: Array<RouteConfig> = [
     redirect: "/blog/articles",
   },
   {
+    path: "/player",
+    name: "MediaPlayer",
+    component: () => import("@/views/app/Player.vue"),
+  },
+  {
+    path: "/editor",
+    name: "Editor",
+    component: () => import("@/views/app/Editor.vue"),
+  },
+  {
+    path: "/viewer",
+    name: "Viewer",
+    component: () => import("@/views/app/Viewer.vue"),
+  },
+  {
+    path: "/explorer",
+    name: "Explorer",
+    component: () => import("@/views/app/Explorer.vue"),
+  },
+  {
+    path: "/browser",
+    name: "Browser",
+    component: () => import("@/views/app/Browser.vue"),
+  },
+  {
     path: "/desktop",
     name: "Desktop",
     component: () => import("@/views/desktop/Desktop.vue"),
   },
   {
     path: "/",
-    redirect: "/blog",
+    redirect: "/desktop",
   },
   {
     path: "*",

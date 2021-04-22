@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="fill-parent" id="app">
     <!-- Route  -->
     <router-view />
     <!-- ServiceWorker Updated Reload -->
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Reloader from "./components/Reloader";
+import Reloader from "@/components/Reloader";
 
 export default {
   components: {
