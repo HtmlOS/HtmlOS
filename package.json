@@ -1,63 +1,50 @@
 {
-  "name": "gankcode",
+  "name": "html-osx",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "ncu": "ncu -u && npx browserslist@latest --update-db",
-    "serve": "vue-cli-service serve --fix",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "deploy": "node deploy.js "
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@htmlos/contextmenu": "^0.1.23",
-    "@quasar/extras": "^1.10.2",
-    "axios": "^0.21.1",
+    "@quasar/extras": "^1.10.6",
     "bcp-47": "^2.0.0",
-    "bcp-47-normalize": "^1.1.1",
-    "core-js": "^3.10.1",
-    "crypto-js": "^4.0.0",
+    "bcp-47-normalize": "^2.0.1",
+    "core-js": "^3.13.1",
     "dplayer": "^1.26.0",
-    "github-markdown-css": "^4.0.0",
-    "highlight.js": "^10.7.2",
-    "markdown-it": "^12.0.4",
-    "markdown-it-emoji": "^2.0.0",
-    "particles.js": "^2.0.0",
-    "quasar": "^1.15.10",
+    "hls.js": "^1.0.5",
+    "quasar": "^2.0.0-beta.1",
     "register-service-worker": "^1.7.2",
-    "vue": "^2.6.12",
-    "vue-class-component": "^7.2.6",
-    "vue-i18n": "^8.20.0",
-    "vue-property-decorator": "^9.1.2",
-    "vue-router": "^3.5.1",
-    "vuex": "^3.6.2"
+    "vue": "^3.0.4",
+    "vue-i18n": "^9.1.6",
+    "vue-router": "^4.0.3",
+    "vuex": "^4.0.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.22.0",
-    "@typescript-eslint/parser": "^4.22.0",
-    "@vue/cli-plugin-babel": "~4.5.12",
-    "@vue/cli-plugin-eslint": "~4.5.12",
-    "@vue/cli-plugin-pwa": "~4.5.12",
-    "@vue/cli-plugin-router": "~4.5.12",
-    "@vue/cli-plugin-typescript": "~4.5.12",
-    "@vue/cli-plugin-vuex": "~4.5.12",
-    "@vue/cli-service": "~4.5.12",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "@vue/cli-plugin-babel": "~5.0.0-beta.0",
+    "@vue/cli-plugin-eslint": "~5.0.0-beta.0",
+    "@vue/cli-plugin-pwa": "~5.0.0-beta.0",
+    "@vue/cli-plugin-router": "~5.0.0-beta.0",
+    "@vue/cli-plugin-typescript": "~5.0.0-beta.0",
+    "@vue/cli-plugin-vuex": "~5.0.0-beta.0",
+    "@vue/cli-service": "~5.0.0-beta.0",
+    "@vue/compiler-sfc": "^3.0.11",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
-    "babel-plugin-transform-imports": "2.0.0",
-    "cross-env": "^7.0.3",
-    "cross-spawn": "^7.0.3",
-    "eslint": "^7.24.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-vue": "^7.9.0",
-    "lint-staged": "^10.5.4",
-    "node-sass": "^5.0.0",
-    "prettier": "^2.2.1",
-    "sass": "^1.32.8",
-    "sass-loader": "^9.0.3",
-    "typescript": "~4.2.4",
-    "vue-cli-plugin-quasar": "~3.0.1",
-    "vue-template-compiler": "^2.6.12"
+    "eslint": "^7.27.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^7.10.0",
+    "file-loader": "^6.2.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.0",
+    "sass": "^1.34.1",
+    "sass-loader": "^12.0.0",
+    "typescript": "~4.3.2",
+    "vue-cli-plugin-quasar": "^4.0.0-beta.1"
   },
   "eslintConfig": {
     "root": true,
@@ -65,7 +52,7 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/vue3-essential",
       "eslint:recommended",
       "@vue/typescript/recommended",
       "@vue/prettier",
@@ -74,27 +61,18 @@
     "parserOptions": {
       "ecmaVersion": 2020
     },
-    "rules": {
-      "@typescript-eslint/no-var-requires": 0,
-      "@typescript-eslint/no-explicit-any": 0,
-      "@typescript-eslint/no-empty-function": 0,
-      "@typescript-eslint/no-unused-vars": 0,
-      "@typescript-eslint/no-use-before-define": 0,
-      "vue/no-v-model-argument": 0
-    }
+    "rules": {}
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not dead"
+    "not dead",
+    "not ie 11"
   ],
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,vue,ts,tsx}": [
-      "vue-cli-service lint",
-      "git add"
-    ]
+    "*.{js,jsx,vue,ts,tsx}": "vue-cli-service lint"
   }
 }

@@ -1,27 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <!-- Loading Animation -->
-    <!-- https://www.html5tricks.com/tag/loading%E5%8A%A8%E7%94%BB/page/2 -->
-    <!-- https://www.html5tricks.com/5-cool-css3-loading-animation.html -->
-    <link rel="stylesheet" type="text/css" href="./index.css" />
-    <div id="boot-loading">
-      <div class="spinner spinner-clock"><span></span></div>
-      <noscript>
-        <strong
-          >We're sorry but it doesn't work properly without JavaScript enabled.
-          Please enable it to continue.</strong
-        >
-      </noscript>
-    </div>
-    <!-- vue -->
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>

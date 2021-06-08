@@ -2,16 +2,16 @@
   {
     "isoName": "English",
     "nativeName": "English",
-    "tags": "en"
+    "lang": "en"
   },
   {
     "isoName": "Chinese (Simplified)",
     "nativeName": "中文(简体)",
-    "tags": "zh"
+    "lang": "zh"
   },
   {
     "isoName": "Chinese (Traditional)",
     "nativeName": "中文(繁體)",
-    "tags": "zh-Hant"
+    "lang": "zh-Hant"
   }
 ]

@@ -1,0 +1,13 @@
+{
+  "os": {
+    "button": {
+      "open": "Open"
+    },
+    "app": {
+      "Browser": "Browser",
+      "Player": "Player",
+      "Editor": "Editor",
+      "Blog": "Blog"
+    }
+  }
+}

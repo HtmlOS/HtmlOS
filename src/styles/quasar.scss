@@ -2,7 +2,6 @@
 @import '~quasar-styl';
 // @import '~quasar-addon-styl';
 
-@import './global.scss';
+@import './theme/index.scss';
 @import './layout/index.scss';
-@import './theme/light.scss';
-@import './theme/dark.scss';
+@import './component/index.scss';

@@ -1,0 +1,13 @@
+{
+  "os": {
+    "button": {
+      "open": "打开"
+    },
+    "app": {
+      "Browser": "浏览器",
+      "Player": "播放器",
+      "Editor": "编辑器",
+      "Blog": "博客"
+    }
+  }
+}

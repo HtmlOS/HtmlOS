@@ -1,4 +1,26 @@
-#app {
+@import "global";
+
+.fill-width {
+  width: 100%;
+}
+
+.fill-height {
+  height: 100%;
+}
+
+.fill-parent {
   width: 100%;
   height: 100%;
+}
+
+.gravity-center {
+  display: flex;
+  //display: -webkit-flex;
+  //-webkit-align-items: center;
+  //-ms-flex-align: center;
+  text-align: center;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }

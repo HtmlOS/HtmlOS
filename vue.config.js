@@ -1,12 +1,15 @@
 "use strict";
 
-process.env.VUE_APP_ENV = JSON.stringify(require("./vue.env").default);
+// process.env.VUE_APP_ENV = JSON.stringify(require("./vue.env").default);
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const path = require("path");
 
 module.exports = {
   // 基本路径
-  publicPath: "./",
+  // publicPath: "./",
 
-  assetsDir: "static",
+  // assetsDir: "static",
   productionSourceMap: false,
   filenameHashing: true,
 
@@ -17,7 +20,17 @@ module.exports = {
   },
 
   // 对内部的 webpack 配置（比如修改、增加Loader选项）(链式操作)
-  chainWebpack: () => {},
+  chainWebpack: (config) => {
+    // 添加`md`文件`loader`支持
+    config.module
+      .rule("md")
+      .test(/\.md$/)
+      .pre()
+      .include.add(path.resolve(__dirname, "./"))
+      .end()
+      .use("file-loader")
+      .loader("file-loader");
+  },
 
   // 向 PWA 插件传递选项
   pwa: {
@@ -26,21 +39,19 @@ module.exports = {
       clientsClaim: true,
     },
     iconPaths: {
-      favicon32: "favicon.ico",
       favicon16: "favicon.ico",
+      favicon32: "favicon.ico",
       appleTouchIcon: "favicon.ico",
       maskIcon: "favicon.ico",
       msTileImage: "favicon.ico",
     },
   },
 
-  // 可以用来传递任何第三方插件选项
   pluginOptions: {
     quasar: {
       importStrategy: "kebab",
       rtlSupport: false,
     },
   },
-
   transpileDependencies: ["quasar"],
 };
