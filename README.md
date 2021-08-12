@@ -7,6 +7,14 @@ WebSite **https://gankcode.com** [![Netlify Status](https://api.netlify.com/api/
 ## Project setup
 ```
 yarn install
+
+```
+
+```
+# GIT 中文乱码
+git config --global core.quotepath false
+# GIT 记住密码
+git config --global credential.helper store
 ```
 
 ### Compiles and hot-reloads for development
@@ -24,8 +32,13 @@ yarn build
 yarn lint
 ```
 
+###  Update Dependencies
 
+```
+yarn global add npm-check-updates
 
+ncu -u
+```
 
 ## Features
 
